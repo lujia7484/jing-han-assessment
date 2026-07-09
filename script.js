@@ -640,13 +640,7 @@ function getInterpretation(score) {
 
 // --- 下载报告 ---
 function downloadReport() {
-  // 先显示打印专用元素
-  document.querySelectorAll('.print-only').forEach(el => el.style.display = 'block');
   window.print();
-  // 打印后隐藏
-  setTimeout(() => {
-    document.querySelectorAll('.print-only').forEach(el => el.style.display = '');
-  }, 500);
 }
 
 // --- 渲染已选特征列表 ---
