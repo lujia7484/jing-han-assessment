@@ -219,16 +219,27 @@ function updateAllCheckboxes() {
 }
 
 // --- 更新提交按钮状态 ---
+// --- 获取未勾选的维度 ---
+function getEmptyDimensions() {
+  return dimensions.filter(dim =>
+    !dim.traits.some(t => checkedState[t.id])
+  ).map(d => d.name);
+}
+
 function updateSubmitButton() {
   const btn = document.getElementById('submit-btn');
   const count = Object.keys(checkedState).length;
-  if (count >= 7) {
+  const empty = getEmptyDimensions();
+
+  if (empty.length === 0) {
     btn.disabled = false;
     btn.textContent = `🔍 查看结果（已选 ${count} 项）`;
+  } else if (empty.length === 7) {
+    btn.disabled = true;
+    btn.textContent = `🔍 查看结果（每个维度至少选 1 题）`;
   } else {
     btn.disabled = true;
-    const remain = 7 - count;
-    btn.textContent = `🔍 查看结果（还需勾选 ${remain} 项）`;
+    btn.textContent = `🔍 还需勾选：${empty.join('、')}`;
   }
   updateCounterHint();
 }
@@ -244,16 +255,19 @@ function updateCounterHint() {
     actionBar.insertBefore(hint, actionBar.firstChild);
   }
   const count = Object.keys(checkedState).length;
+  const empty = getEmptyDimensions();
   hint.textContent = count === 0
-    ? '👆 点击特征即可勾选（每题无对错，如实选择即可）'
-    : `已勾选 ${count} 项`;
+    ? '👆 点击特征即可勾选，每个维度至少选 1 题'
+    : empty.length > 0
+      ? `已勾选 ${count} 项 · 待补：${empty.join('、')}`
+      : `已勾选 ${count} 项 · ✅ 全部维度已覆盖`;
 }
 
 // --- 绑定事件 ---
 function bindEvents() {
   document.getElementById('submit-btn').addEventListener('click', () => {
-    const count = Object.keys(checkedState).length;
-    if (count < 3) {
+    const empty = getEmptyDimensions();
+    if (empty.length > 0) {
       shakeElement(document.getElementById('submit-btn'));
       return;
     }
@@ -314,6 +328,13 @@ function showResult() {
   const resultSection = document.getElementById('result');
 
   resultSection.innerHTML = `
+    <!-- 报告头部（打印可见） -->
+    <div class="print-only report-header">
+      <img class="report-logo" src="logo.png" alt="青稞家庭教育">
+      <h2 class="report-title">先天气质评估报告</h2>
+      <p class="report-date">评估日期：${new Date().toLocaleDateString('zh-CN', {year:'numeric',month:'long',day:'numeric'})}</p>
+    </div>
+
     <!-- 总分卡片 -->
     <div class="score-card">
       <p style="font-size:0.85rem;color:var(--color-text-muted);margin-bottom:4px;">
@@ -334,12 +355,17 @@ function showResult() {
       </div>
       <div class="spectrum-labels">
         <span>🧸 憨娃<br><small>钝感型</small></span>
-        <span>⚖️ 均衡</span>
         <span>🦊 精娃<br><small>高敏型</small></span>
       </div>
       <p style="margin-top: 12px; font-size: 0.85rem; color: var(--color-text-muted);">
         基于 ${total} 项选中特征：精娃特征 ${jingCount} 项 · 憨娃特征 ${hanCount} 项
       </p>
+    </div>
+
+    <!-- 已选特征 -->
+    <div class="selected-traits-card">
+      <h3>📝 您的选择</h3>
+      ${renderSelectedTraits()}
     </div>
 
     <!-- 各维度分析 -->
@@ -357,8 +383,35 @@ function showResult() {
     <!-- 个性化培养建议 -->
     ${renderAdviceCards(interpretation)}
 
-    <!-- 重测按钮 -->
-    <button class="btn-retest" onclick="resetAll()">🔄 重测</button>
+    <!-- 咨询入口 -->
+    <div class="contact-card" style="animation: fade-up 0.5s ease 0.6s both;">
+      <div class="contact-header">
+        <span class="contact-avatar">💬</span>
+        <div class="contact-title">
+          <h4>想进一步了解？</h4>
+          <p>家庭教育现状梳理 | 养育模式溯源 | 孩子心理成长分析</p>
+        </div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-row">
+          <span class="contact-label">咨询老师</span>
+          <span class="contact-value">来来老师</span>
+        </div>
+        <div class="contact-qr-row">
+          <span class="contact-label">扫二维码</span>
+          <div class="contact-qr-wrap">
+            <img class="contact-qr-img" src="来来老师.png" alt="来来老师微信二维码" width="120" height="120">
+          </div>
+        </div>
+        <p class="contact-hint">添加请备注"气质评估"</p>
+      </div>
+    </div>
+
+    <!-- 操作按钮组 -->
+    <div class="result-actions">
+      <button class="btn-download" onclick="downloadReport()">📥 下载报告</button>
+      <button class="btn-retest" onclick="resetAll()">🔄 重测</button>
+    </div>
   `;
 
   // 显示结果区域
@@ -428,11 +481,9 @@ function renderDimRow(d) {
   if (d.total === 0) return '';
 
   const pct = d.score;
-  const barColor = pct >= 60 ? 'var(--color-jing)'
-    : pct <= 40 ? 'var(--color-han)'
-    : 'var(--color-secondary)';
+  const barColor = pct >= 55 ? 'var(--color-jing)' : 'var(--color-han)';
 
-  const side = pct >= 55 ? '偏精' : pct <= 45 ? '偏憨' : '均衡';
+  const side = pct >= 55 ? '偏精' : '偏憨';
 
   return `
     <div class="dim-row">
@@ -549,24 +600,6 @@ function getHanAdvice() {
   };
 }
 
-function getBalancedAdvice() {
-  return {
-    type: '均衡型',
-    sections: [
-      {
-        title: '🌈 顺势而为，双向借鉴',
-        points: [
-          '均衡型孩子能根据环境灵活调用不同特质，这是非常健康的心理配置，不必强求往某个方向发展',
-          '观察孩子在哪些领域自然发光，提供资源和支持即可，让 TA 自由地成为自己想成为的样子',
-        ]
-      },
-    ],
-    keywords: '观察、支持、顺势而为',
-    summary: '均衡型孩子适应面最广，家长最重要的是不添乱——观察、支持、信任，让 TA 自然生长。',
-    isBalanced: true,
-  };
-}
-
 function getInterpretation(score) {
   if (score >= 80) {
     return {
@@ -577,22 +610,13 @@ function getInterpretation(score) {
       ...getJingAdvice(),
     };
   }
-  if (score >= 60) {
+  if (score >= 50) {
     return {
       label: '😎 偏精娃',
       color: '#f97316',
       bgColor: '#fff7ed',
       desc: '孩子整体偏向高敏型，有一定的观察力和社交意识，主意比较正，但也保留了一些憨直和单纯的一面。灵活性好但不过度，精中带憨是比较理想的状态。',
       ...getJingAdvice(),
-    };
-  }
-  if (score >= 40) {
-    return {
-      label: '⚖️ 均衡型',
-      color: '#10b981',
-      bgColor: '#d1fae5',
-      desc: '孩子在精娃和憨娃的特质之间取得了很好的平衡。在不同场景下灵活切换：需要观察力时能敏锐捕捉，需要专注时也能沉浸其中。既有主见又不过度强势，既懂社交又不依赖社交认可。',
-      ...getBalancedAdvice(),
     };
   }
   if (score >= 20) {
@@ -612,6 +636,35 @@ function getInterpretation(score) {
     desc: '孩子是典型的启动缓慢型气质，钝感强，启动慢但稳定性高。不隐藏意图，表达直接干脆，容易让人产生信任感。沉浸在自己世界里的时候专注度极高，对他人认可需求低，内耗极少。"傻人有傻福"——在人际关系中往往更受欢迎，获得的机会也更多。',
     ...getHanAdvice(),
   };
+}
+
+// --- 下载报告 ---
+function downloadReport() {
+  // 先显示打印专用元素
+  document.querySelectorAll('.print-only').forEach(el => el.style.display = 'block');
+  window.print();
+  // 打印后隐藏
+  setTimeout(() => {
+    document.querySelectorAll('.print-only').forEach(el => el.style.display = '');
+  }, 500);
+}
+
+// --- 渲染已选特征列表 ---
+function renderSelectedTraits() {
+  let html = '';
+  dimensions.forEach(dim => {
+    const selected = dim.traits.filter(t => checkedState[t.id]);
+    if (selected.length === 0) return;
+    html += `
+    <div class="selected-dim">
+      <span class="selected-dim-icon">${dim.icon}</span>
+      <span class="selected-dim-name">${dim.name}</span>
+      <ul class="selected-list">
+        ${selected.map(t => `<li class="selected-item ${t.type}">${t.label}</li>`).join('')}
+      </ul>
+    </div>`;
+  });
+  return html;
 }
 
 // --- 保存状态 ---

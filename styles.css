@@ -457,8 +457,47 @@ body {
 }
 
 /* ============================================
-   结果区重测按钮
+   结果区操作按钮组
    ============================================ */
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.result-actions > * {
+  flex: 1;
+}
+
+/* 下载按钮 */
+.btn-download {
+  display: block;
+  padding: 15px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font-stack);
+  letter-spacing: 0.03em;
+  background: linear-gradient(135deg, var(--amber-400), var(--amber-500));
+  color: white;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+}
+
+.btn-download:hover {
+  background: linear-gradient(135deg, var(--amber-500), var(--amber-600));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.45);
+}
+
+.btn-download:active {
+  transform: translateY(0);
+}
+
+/* 重测按钮 */
 
 .btn-retest {
   display: block;
@@ -619,10 +658,8 @@ body {
   border-radius: 5px;
   background: linear-gradient(to right,
     var(--indigo-500) 0%,
-    #a5b4fc 20%,
-    var(--gray-200) 40%,
-    var(--gray-200) 60%,
-    #fdba74 80%,
+    #a5b4fc 25%,
+    #fdba74 75%,
     var(--orange-500) 100%
   );
   margin: 20px 0 10px;
@@ -847,6 +884,107 @@ body {
   line-height: 1.7;
 }
 
+/* --- 咨询入口卡片 --- */
+.contact-card {
+  background: linear-gradient(150deg, #fffbeb 0%, #fefce8 100%);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  margin-top: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid #fde68a;
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.contact-avatar {
+  font-size: 40px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.contact-title h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--amber-700);
+  margin: 0 0 2px 0;
+}
+
+.contact-title p {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+.contact-info {
+  background: white;
+  border-radius: var(--radius-sm);
+  border: 1px dashed #fde68a;
+  overflow: hidden;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.contact-row + .contact-row {
+  border-top: 1px solid #fef3c7;
+}
+
+.contact-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.contact-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.contact-phone {
+  color: var(--amber-600);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+
+.contact-qr-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-top: 1px solid #fef3c7;
+}
+
+.contact-qr-wrap {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.contact-qr-img {
+  display: block;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.contact-hint {
+  font-size: 0.73rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 10px 16px;
+  background: #fefce8;
+  margin: 0;
+}
+
 /* --- Footer --- */
 .footer {
   text-align: center;
@@ -902,5 +1040,177 @@ body {
 
   .trait-item {
     padding: 13px 16px;
+  }
+}
+
+/* ============================================
+   打印专用（报告头部 / 已选特征）
+   ============================================ */
+
+.print-only {
+  display: none;
+}
+
+.report-header {
+  text-align: center;
+  padding: 10px 0 8px;
+  border-bottom: 2px solid #fde68a;
+  margin-bottom: 16px;
+}
+
+.report-logo {
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.report-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--amber-700);
+  margin: 0 0 4px 0;
+}
+
+.report-date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* 已选特征卡片 */
+.selected-traits-card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+
+.selected-traits-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.selected-dim {
+  margin-bottom: 12px;
+}
+
+.selected-dim:last-child {
+  margin-bottom: 0;
+}
+
+.selected-dim-icon {
+  font-size: 1rem;
+  margin-right: 4px;
+}
+
+.selected-dim-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gray-700);
+  margin-bottom: 4px;
+  display: inline-block;
+}
+
+.selected-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 4px;
+}
+
+.selected-item {
+  position: relative;
+  padding: 4px 0 4px 18px;
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+.selected-item::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.selected-item.jing::before {
+  background: var(--color-jing);
+}
+
+.selected-item.han::before {
+  background: var(--color-han);
+}
+
+/* ============================================
+   打印样式（下载报告）
+   ============================================ */
+@media print {
+  body {
+    background: white;
+    padding: 20px;
+  }
+
+  .banner,
+  .checklist-hint,
+  #checklist,
+  .action-bar,
+  .footer,
+  .result-actions,
+  .particle {
+    display: none !important;
+  }
+
+  /* 打印时显示报告头部 */
+  .print-only {
+    display: block !important;
+  }
+
+  #result {
+    max-width: 100%;
+    padding: 0;
+    opacity: 1 !important;
+    max-height: none !important;
+    pointer-events: auto !important;
+  }
+
+  .score-card,
+  .dimension-analysis,
+  .selected-traits-card,
+  .advice-section,
+  .advice-summary,
+  .contact-card {
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+    break-inside: avoid;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+  }
+
+  .advice-section {
+    border-left: 3px solid #f59e0b;
+  }
+
+  .universal-section {
+    border-left-color: #10b981;
+  }
+
+  .score-number {
+    font-size: 2.5rem;
+  }
+
+  .contact-qr-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .selected-traits-card,
+  .dimension-analysis {
+    font-size: 0.85rem;
   }
 }
