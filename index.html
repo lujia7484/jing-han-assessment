@@ -1,45 +1,1544 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>精娃 vs 憨娃 — 先天气质评估</title>
-  <link rel="stylesheet" href="styles.css">
+<script>
+window.contextInfo = {"files":[],"materials":[],"crafts":[]};
+// 处理锚点链接跳转（srcDoc iframe 中锚点链接默认行为不正确）
+document.addEventListener('click', function(e) {
+  var anchor = e.target.closest('a');
+  if (anchor) {
+    var href = anchor.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      var targetId = href.slice(1);
+      var target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+});
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>精娃 vs 憨娃 — 先天气质评估 | 青稞家庭教育</title>
+<style>
+:root {
+  --amber-50: #fffbeb;
+  --amber-100: #fef3c7;
+  --amber-200: #fde68a;
+  --amber-300: #fcd34d;
+  --amber-400: #fbbf24;
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --amber-700: #b45309;
+  --indigo-50: #eef2ff;
+  --indigo-100: #e0e7ff;
+  --indigo-200: #c7d2fe;
+  --indigo-300: #a5b4fc;
+  --indigo-400: #818cf8;
+  --indigo-500: #6366f1;
+  --indigo-600: #4f46e5;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --jing-color: #f59e0b;
+  --jing-light: #fef3c7;
+  --jing-gradient: linear-gradient(135deg, #f59e0b, #ef4444);
+  --han-color: #6366f1;
+  --han-light: #e0e7ff;
+  --han-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --balanced-color: #10b981;
+  --balanced-light: #d1fae5;
+  --balanced-gradient: linear-gradient(135deg, #10b981, #06b6d4);
+  --bg-gradient: linear-gradient(135deg, #fffbeb 0%, #fef9f0 30%, #f0f4ff 70%, #f5f3ff 100%);
+  --card-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+  --card-shadow-hover: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  color: var(--gray-800);
+  line-height: 1.6;
+}
+
+/* ===== BANNER ===== */
+.banner {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+  padding: 48px 20px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(245,158,11,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 30%, rgba(99,102,241,0.15) 0%, transparent 60%);
+}
+.banner-brand {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+}
+.banner-brand span {
+  background: linear-gradient(90deg, var(--amber-400), var(--amber-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.banner-icon {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 16px;
+  animation: float 3s ease-in-out infinite;
+  position: relative;
+  filter: drop-shadow(0 4px 12px rgba(245,158,11,0.4));
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.banner-title {
+  font-size: clamp(24px, 6vw, 36px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  position: relative;
+  letter-spacing: -0.5px;
+}
+.banner-title .highlight-jing {
+  background: var(--jing-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.banner-title .highlight-han {
+  background: var(--han-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.banner-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+  line-height: 1.8;
+}
+.banner-subtitle strong {
+  color: rgba(255,255,255,0.9);
+}
+.banner-wave {
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 40px;
+  background: var(--bg-gradient);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 16px 120px;
+}
+
+/* ===== PROGRESS TRACKER ===== */
+.progress-tracker {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(245,158,11,0.1);
+}
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.progress-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+.progress-count {
+  font-size: 13px;
+  color: var(--amber-600);
+  font-weight: 700;
+  background: var(--amber-100);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.progress-bar-bg {
+  height: 6px;
+  background: var(--gray-100);
+  border-radius: 3px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--amber-400), var(--amber-500));
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+.progress-dots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.progress-dot {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--gray-400);
+  transition: color 0.3s;
+}
+.progress-dot.done { color: var(--amber-600); }
+.progress-dot-circle {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  border: 2px solid var(--gray-200);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.progress-dot.done .progress-dot-circle {
+  background: linear-gradient(135deg, var(--amber-400), var(--amber-500));
+  border-color: var(--amber-400);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* ===== SECTION HINT ===== */
+.section-hint {
+  text-align: center;
+  font-size: 15px;
+  color: var(--gray-600);
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(99,102,241,0.06));
+  border-radius: var(--radius-md);
+  border: 1px dashed rgba(245,158,11,0.3);
+}
+
+/* ===== DIMENSION CARDS ===== */
+.dimension-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  margin-bottom: 20px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--gray-100);
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+  animation: cardIn 0.5s ease both;
+}
+.dimension-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.dimension-card:nth-child(1) { animation-delay: 0.05s; }
+.dimension-card:nth-child(2) { animation-delay: 0.10s; }
+.dimension-card:nth-child(3) { animation-delay: 0.15s; }
+.dimension-card:nth-child(4) { animation-delay: 0.20s; }
+.dimension-card:nth-child(5) { animation-delay: 0.25s; }
+.dimension-card:nth-child(6) { animation-delay: 0.30s; }
+.dimension-card:nth-child(7) { animation-delay: 0.35s; }
+
+.dimension-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--gray-100);
+  background: linear-gradient(135deg, rgba(245,158,11,0.04), rgba(99,102,241,0.04));
+}
+.dimension-icon {
+  font-size: 22px;
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--amber-100), var(--indigo-100));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.dimension-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+.dimension-badge {
+  margin-left: auto;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+  background: var(--gray-100);
+  color: var(--gray-400);
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.dimension-badge.has-selection {
+  background: var(--amber-100);
+  color: var(--amber-700);
+}
+
+.features-list {
+  padding: 8px 0;
+}
+
+/* ===== FEATURE ITEM ===== */
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+.feature-item:last-child { border-bottom: none; }
+.feature-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 0%;
+  background: linear-gradient(180deg, transparent, rgba(245,158,11,0.06));
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+.feature-item.selected::before { height: 100%; }
+.feature-item:hover { background: rgba(245,158,11,0.03); }
+
+.feature-checkbox {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--gray-300);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 1;
+  background: #fff;
+}
+.feature-item.selected .feature-checkbox {
+  background: linear-gradient(135deg, var(--amber-400), var(--amber-500));
+  border-color: var(--amber-400);
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(245,158,11,0.4);
+}
+.feature-checkbox svg {
+  width: 12px; height: 12px;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.2s 0.05s;
+}
+.feature-item.selected .feature-checkbox svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.feature-text {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s;
+  flex: 1;
+}
+.feature-item.selected .feature-text {
+  color: var(--gray-800);
+}
+
+/* ===== PARTICLE ===== */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 9999;
+  animation: particleFly 0.8s ease-out forwards;
+}
+@keyframes particleFly {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+}
+
+/* ===== STICKY BOTTOM BAR ===== */
+.sticky-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 12px 16px 16px;
+  z-index: 100;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.08);
+}
+.sticky-bar-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sticky-hint {
+  font-size: 12px;
+  color: var(--gray-500);
+  text-align: center;
+  min-height: 16px;
+}
+.sticky-hint .missing {
+  color: var(--amber-600);
+  font-weight: 600;
+}
+.sticky-buttons {
+  display: flex;
+  gap: 10px;
+}
+.btn-primary {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary:disabled {
+  background: var(--gray-200);
+  color: var(--gray-400);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.btn-primary:not(:disabled) {
+  background: linear-gradient(135deg, var(--amber-400), var(--amber-600));
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(245,158,11,0.4);
+}
+.btn-primary:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245,158,11,0.5);
+}
+.btn-primary:not(:disabled):active {
+  transform: translateY(0);
+}
+.btn-secondary {
+  padding: 14px 20px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+  color: var(--gray-600);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-secondary:hover {
+  border-color: var(--amber-300);
+  color: var(--amber-600);
+  background: var(--amber-50);
+}
+
+/* ===== RESULT SECTION ===== */
+.result-section {
+  display: none;
+  animation: resultIn 0.6s ease both;
+}
+.result-section.visible { display: block; }
+@keyframes resultIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Print-only report header */
+.print-only {
+  display: none;
+}
+.report-header {
+  text-align: center;
+  padding: 0 0 16px;
+  border-bottom: 2px solid #fde68a;
+  margin-bottom: 20px;
+}
+.report-logo {
+  height: 48px;
+  margin-bottom: 8px;
+}
+.report-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #b45309;
+  margin: 0 0 4px;
+}
+.report-date {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* Score Card */
+.score-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.score-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  opacity: 0.08;
+}
+.score-card.type-jing::before { background: var(--jing-gradient); }
+.score-card.type-han::before { background: var(--han-gradient); }
+.score-card.type-balanced::before { background: var(--balanced-gradient); }
+
+.score-label-top {
+  font-size: 12px;
+  color: var(--gray-400);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.score-number {
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 4px;
+  transition: all 0.1s;
+}
+.score-card.type-jing .score-number { color: var(--amber-500); }
+.score-card.type-han .score-number { color: var(--indigo-500); }
+.score-card.type-balanced .score-number { color: var(--emerald-500); }
+.score-card.type-jing-lean .score-number { color: #fb923c; }
+.score-card.type-han-lean .score-number { color: #818cf8; }
+
+.score-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.type-jing .score-type-badge { background: var(--amber-100); color: var(--amber-700); }
+.type-han .score-type-badge { background: var(--indigo-100); color: var(--indigo-700); }
+.type-balanced .score-type-badge { background: var(--balanced-light); color: var(--emerald-700); }
+.type-jing-lean .score-type-badge { background: #ffedd5; color: #c2410c; }
+.type-han-lean .score-type-badge { background: #e0e7ff; color: #4338ca; }
+
+.score-desc {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.7;
+  max-width: 400px;
+  margin: 0 auto 24px;
+}
+
+/* Spectrum Bar */
+.spectrum-wrap {
+  margin: 0 0 12px;
+}
+.spectrum-bar-container {
+  position: relative;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--indigo-400), #a78bfa, var(--emerald-400), #fb923c, var(--amber-500));
+  margin-bottom: 8px;
+  overflow: visible;
+}
+.spectrum-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px; height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  border: 3px solid var(--amber-500);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: left 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+.spectrum-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--gray-500);
+}
+.spectrum-labels .left { color: var(--indigo-500); font-weight: 600; }
+.spectrum-labels .right { color: var(--amber-600); font-weight: 600; }
+
+.score-stats {
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: 8px;
+}
+.score-stats .jing-count { color: var(--amber-600); font-weight: 600; }
+.score-stats .han-count { color: var(--indigo-500); font-weight: 600; }
+
+/* Selected Features Review */
+.result-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--card-shadow);
+}
+.result-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.review-dimension {
+  margin-bottom: 16px;
+}
+.review-dim-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-500);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.review-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.review-feature.jing {
+  background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(251,146,60,0.08));
+  color: var(--gray-700);
+  border-left: 3px solid var(--amber-400);
+}
+.review-feature.han {
+  background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.08));
+  color: var(--gray-700);
+  border-left: 3px solid var(--indigo-400);
+}
+.review-feature-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.review-feature.jing .review-feature-tag { background: var(--amber-200); color: var(--amber-800); }
+.review-feature.han .review-feature-tag { background: var(--indigo-200); color: var(--indigo-800); }
+
+/* Dimension Analysis */
+.dim-analysis-item {
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease;
+}
+.dim-analysis-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.dim-analysis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.dim-analysis-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+.dim-analysis-pct {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray-500);
+}
+.dim-bar-bg {
+  height: 8px;
+  background: var(--gray-100);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.dim-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--indigo-400), var(--emerald-400), var(--amber-500));
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+
+/* Advice Cards */
+.advice-card {
+  background: linear-gradient(135deg, #fff 0%, rgba(245,158,11,0.02) 100%);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(245,158,11,0.1);
+}
+.advice-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.advice-card-title .advice-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.advice-card.jing-advice .advice-icon { background: var(--amber-100); }
+.advice-card.han-advice .advice-icon { background: var(--indigo-100); }
+.advice-card.general-advice .advice-icon { background: var(--balanced-light); }
+.advice-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.advice-list li {
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.6;
+  padding-left: 20px;
+  position: relative;
+}
+.advice-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--amber-400);
+  font-size: 12px;
+}
+.advice-card.han-advice .advice-list li::before { color: var(--indigo-400); }
+.advice-card.general-advice .advice-list li::before { color: var(--emerald-500); }
+
+/* Consult Card */
+.consult-card {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  margin-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.consult-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(245,158,11,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 30%, rgba(99,102,241,0.12) 0%, transparent 60%);
+}
+.consult-card > * { position: relative; }
+.consult-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  background: linear-gradient(90deg, var(--amber-300), var(--amber-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.consult-subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.consult-qr {
+  width: 120px; height: 120px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  margin: 0 auto 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(255,255,255,0.2);
+  gap: 6px;
+}
+.consult-qr-icon { font-size: 36px; }
+.consult-qr-text { font-size: 11px; color: rgba(255,255,255,0.4); }
+.consult-teacher {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 8px;
+}
+.consult-teacher strong {
+  color: var(--amber-300);
+}
+.consult-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.05);
+  padding: 6px 14px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Result Action Buttons */
+.result-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.btn-download {
+  flex: 1;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--amber-400), var(--amber-600));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(245,158,11,0.3);
+}
+.btn-download:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,158,11,0.4); }
+.btn-reset {
+  flex: 1;
+  padding: 14px;
+  background: #fff;
+  color: var(--gray-600);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-reset:hover { border-color: var(--indigo-300); color: var(--indigo-600); background: var(--indigo-50); }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--gray-800);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 32px 20px;
+  font-size: 12px;
+  line-height: 2;
+}
+.footer strong { color: rgba(255,255,255,0.8); }
+
+/* ===== PRINT ===== */
+@media print {
+  .banner, .sticky-bar, .result-actions, .footer, .progress-tracker, .section-hint, .dimension-card, .banner-wave { display: none !important; }
+  .print-only { display: block !important; }
+  body { background: #fff; padding: 16px; }
+  .container { padding: 0; }
+  .result-section { display: block !important; }
+  .score-card, .result-card, .advice-card, .consult-card { box-shadow: none; border: 1px solid #e5e7eb; break-inside: avoid; margin-bottom: 12px; }
+  .score-number { font-size: 60px; }
+  .consult-qr-img { width: 100px; height: 100px; }
+  .dim-analysis-item { opacity: 1 !important; transform: none !important; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 480px) {
+  .progress-dots { gap: 10px; }
+  .progress-dot { font-size: 12px; }
+}
+</style>
 </head>
 <body>
 
-  <!-- ========== 顶部 Banner ========== -->
-  <header class="banner">
-    <p class="banner-brand">青稞家庭教育 · 先天气质评估</p>
-    <div class="banner-icon">🧒</div>
-    <h1>你的孩子是精娃还是憨娃？</h1>
-    <p class="banner-sub">气质是与生俱来的——每个孩子对环境的<strong>敏感度</strong>和<strong>反应方式</strong>天生不同。<br>读懂孩子的"原始出厂设置"，才能<strong>因材施教、扬长补短</strong>。<br>气质无好坏，差异即礼物 ✨</p>
-  </header>
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-brand"><span>青稞家庭教育</span> · 先天气质评估</div>
+  <span class="banner-icon">🧒</span>
+  <h1 class="banner-title">你的孩子是<span class="highlight-jing">精娃</span>还是<span class="highlight-han">憨娃</span>？</h1>
+  <p class="banner-subtitle">
+    气质是与生俱来的——每个孩子对环境的<strong>敏感度</strong>和<strong>反应方式</strong>天生不同。<br>
+    读懂孩子的"原始出厂设置"，才能<strong>因材施教、扬长补短</strong>。<br>
+    气质无好坏，差异即礼物 ✨
+  </p>
+  <div class="banner-wave"></div>
+</div>
 
-  <!-- ========== 特征勾选区 ========== -->
-  <p class="checklist-hint">阅读以下场景，符合你家孩子的请点击勾选 👇</p>
-  <main id="checklist">
-    <!-- 由 script.js 动态生成 -->
-  </main>
+<!-- MAIN CONTAINER -->
+<div class="container">
 
-  <!-- ========== 操作按钮 ========== -->
-  <div class="action-bar">
-    <button id="submit-btn" class="btn-primary" disabled>🔍 查看结果（每个维度至少选 1 题）</button>
-    <button id="reset-btn" class="btn-secondary" style="display:none;">🔄 重测</button>
+  <!-- PROGRESS TRACKER -->
+  <div class="progress-tracker">
+    <div class="progress-header">
+      <span class="progress-label">📍 评估进度</span>
+      <span class="progress-count" id="progressCount">0/7 维度已完成</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressBarFill"></div>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
   </div>
 
-  <!-- ========== 结果展示区 ========== -->
-  <section id="result" class="result-hidden">
-    <!-- 由 script.js 动态填充 -->
-  </section>
+  <!-- SECTION HINT -->
+  <div class="section-hint">
+    阅读以下场景，符合你家孩子的请点击勾选 👇
+  </div>
 
-  <!-- ========== 页脚 ========== -->
-  <footer class="footer">
-    <p class="footer-company">青稞时代（广东）心理咨询有限公司</p>
-    <p class="footer-expert">📱 关注「青稞心理咨询」公众号，获取更多科学育儿内容</p>
-    <p class="footer-copy">© 2026 青稞家庭教育 · 先天气质无好坏，因材施教是核心</p>
-  </footer>
+  <!-- DIMENSION CARDS -->
+  <div id="dimensionsContainer"></div>
 
-  <script src="script.js"></script>
+  <!-- RESULT SECTION -->
+  <div class="result-section" id="resultSection">
+
+    <!-- Report Header (print only) -->
+    <div class="print-only report-header">
+      <img class="report-logo" src="logo.png" alt="青稞家庭教育">
+      <h2 class="report-title">先天气质评估报告</h2>
+      <p class="report-date" id="reportDate"></p>
+    </div>
+
+    <!-- Score Card -->
+    <div class="score-card" id="scoreCard">
+      <div class="score-label-top">孩子的先天气质偏向</div>
+      <div class="score-number" id="scoreNumber">0</div>
+      <div><span class="score-type-badge" id="scoreTypeBadge"></span></div>
+      <p class="score-desc" id="scoreDesc"></p>
+      <div class="spectrum-wrap">
+        <div class="spectrum-bar-container">
+          <div class="spectrum-indicator" id="spectrumIndicator" style="left:0%"></div>
+        </div>
+        <div class="spectrum-labels">
+          <span class="left">🧸 憨娃/钝感型</span>
+          <span class="right">🦊 精娃/高敏型</span>
+        </div>
+      </div>
+      <div class="score-stats" id="scoreStats"></div>
+    </div>
+
+    <!-- Selected Features Review -->
+    <div class="result-card">
+      <div class="result-card-title">📝 您的选择</div>
+      <div id="reviewContainer"></div>
+    </div>
+
+    <!-- Dimension Analysis -->
+    <div class="result-card">
+      <div class="result-card-title">📊 各维度精憨分布</div>
+      <p style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">越偏左越"憨"，越偏右越"精"——看清孩子在不同维度的独特面貌</p>
+      <div id="dimAnalysisContainer"></div>
+    </div>
+
+    <!-- Advice -->
+    <div id="adviceContainer"></div>
+
+    <!-- Consult Card -->
+    <div class="consult-card">
+      <div class="consult-title">想进一步了解？</div>
+      <div class="consult-subtitle">家庭教育现状梳理 | 养育模式溯源 | 孩子心理成长分析</div>
+      <div class="consult-qr">
+        <img class="consult-qr-img" src="来来老师.png" alt="来来老师微信二维码" style="width:120px;height:120px;border-radius:12px;">
+      </div>
+      <div class="consult-teacher">咨询老师：<strong>来来老师</strong></div>
+      <div class="consult-note">添加请备注"气质评估"</div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="result-actions">
+      <button class="btn-download" onclick="downloadReport()">📥 下载报告</button>
+      <button class="btn-reset" onclick="resetAll()">🔄 重测</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div><strong>青稞时代（广东）心理咨询有限公司</strong></div>
+  <div>📱 关注「青稞心理咨询」公众号，获取更多科学育儿内容</div>
+  <div>© 2026 青稞家庭教育 · 先天气质无好坏，因材施教是核心</div>
+</div>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <div class="sticky-bar-inner">
+    <div class="sticky-hint" id="stickyHint"></div>
+    <div class="sticky-buttons">
+      <button class="btn-primary" id="viewResultBtn" onclick="viewResult()" disabled>🔍 查看结果（每个维度至少选 1 题）</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const dimensions = [
+  {
+    id: 'd1', icon: '🧭', name: '自主意识',
+    features: [
+      { type: 'jing', text: '你给孩子安排好了周末计划，TA 却拿出自己的一套方案，坚持按自己的来，很难被说服' },
+      { type: 'jing', text: '你给 TA 买衣服，TA 非要自己挑，搭配好了还要照镜子审视一番，对你选的统统不满意' },
+      { type: 'jing', text: '你让 TA 用某种方法收拾玩具，TA 偏要用自己发明的方法，还说你的方法"太慢了"' },
+      { type: 'han', text: '你问 TA 周末想做什么，回答永远是"随便""都行"，不太有自己的想法' },
+      { type: 'han', text: '你让 TA 选一个兴趣班，TA 纠结半天选不出来，最后说"妈妈你帮我选吧"' },
+      { type: 'han', text: '玩游戏时伙伴说玩什么就玩什么，从不主动提议，被安排了也不介意' },
+    ]
+  },
+  {
+    id: 'd2', icon: '💬', name: '表达与意图',
+    features: [
+      { type: 'jing', text: '想吃月饼不直说，先问你"妈妈，月亮为什么老跟着我？"绕了一大圈最后才暴露真实目的 🌙' },
+      { type: 'jing', text: '想让你多陪一会儿但不直说，而是拿着书凑过来"妈妈这个故事我看不懂你帮我看看"' },
+      { type: 'jing', text: '为了多看会儿动画片，会说"这集就剩三分钟了让我看完嘛"，其实还剩十五分钟' },
+      { type: 'han', text: '想要什么就直接说"我要那个！"从不绕弯子，你一眼就能看穿 TA 的小心思' },
+      { type: 'han', text: '开心就哈哈大笑，不高兴马上拉下脸，做错事一问你表情就出卖了自己，藏不住事' },
+      { type: 'han', text: '偷吃了零食后嘴角还挂着渣就来跟你说"我没吃"，撒谎水平约等于零' },
+    ]
+  },
+  {
+    id: 'd3', icon: '🌍', name: '环境适应',
+    features: [
+      { type: 'jing', text: '第一次带去朋友家做客，TA 很快就自来熟，像在自己家一样到处探索' },
+      { type: 'jing', text: '全家出去旅游住酒店，TA 比你还先适应，倒头就睡，不认床不认生' },
+      { type: 'jing', text: '你带 TA 参加全是陌生大人的饭局，TA 能大方地跟不认识的叔叔阿姨聊天' },
+      { type: 'han', text: '到一个陌生环境会紧紧跟在你身边，要过好一阵子才慢慢放开，比较慢热' },
+      { type: 'han', text: '家里来了不太熟的亲戚，TA 会躲进自己房间不愿意出来打招呼' },
+      { type: 'han', text: '转学或换班后前几周每天都闷闷不乐，要一两个月才能慢慢缓过来' },
+    ]
+  },
+  {
+    id: 'd4', icon: '🤝', name: '社交能力',
+    features: [
+      { type: 'jing', text: '不用你教，TA 自己就知道见了叔叔阿姨要热情打招呼，嘴巴还特别甜，很会哄人开心' },
+      { type: 'jing', text: '在小区里见谁都能聊两句，保安叔叔、清洁阿姨、快递小哥全被 TA 混熟了' },
+      { type: 'jing', text: '看到新来的小朋友没人一起玩，TA 会主动过去邀请，很有"外交"意识' },
+      { type: 'han', text: '你从 TA 小时候就教"见人要打招呼"，教到七八岁才终于能主动做到，之前每次都要你提醒' },
+      { type: 'han', text: '和小朋友相处时一是一二是二，不会特意讨好谁，有时显得又愣又轴' },
+      { type: 'han', text: '在学校被排挤或欺负了，不知道怎么反击也不知道怎么求助，回家闷着不说' },
+    ]
+  },
+  {
+    id: 'd5', icon: '🧠', name: '思维模式',
+    features: [
+      { type: 'jing', text: '你换了微信头像，TA 第二天就发现了；邻居家门上新贴了对联，TA 比你先注意到' },
+      { type: 'jing', text: '家里谁跟谁闹别扭了，TA 比你还先察觉，还会悄悄来提醒你"妈妈，爸爸好像不高兴了"' },
+      { type: 'jing', text: '出门前 TA 会提醒你"妈妈你忘了带手机/钥匙"，观察力比你还强' },
+      { type: 'han', text: '你换了新发型回到家，TA 过了半天才突然抬头说"诶妈妈你剪头发了？"' },
+      { type: 'han', text: '你交代 TA 做三件事，TA 做第一件时太投入太开心，后面两件完全忘光了' },
+      { type: 'han', text: 'TA 经常找不到自己的东西，袜子只剩一只、作业本不翼而飞、水壶又忘在学校了' },
+    ]
+  },
+  {
+    id: 'd6', icon: '🎭', name: '情绪表现',
+    features: [
+      { type: 'jing', text: '你说话语气稍微重了一点点，TA 就觉得很委屈，甚至眼泪在眼眶里打转' },
+      { type: 'jing', text: '你夸了别的小朋友一句，TA 马上就不高兴了，有明显的"吃醋"反应' },
+      { type: 'jing', text: '感觉到你心情不好时，TA 会小心翼翼地过来哄你"妈妈你别生气了，我给你倒杯水"' },
+      { type: 'han', text: '在学校被老师狠狠批评了，回家跟没事人一样，过一会儿就笑嘻嘻地玩去了' },
+      { type: 'han', text: '被小伙伴捉弄了也不记仇，憨憨一笑就过去了，不会耿耿于怀，转头就忘了' },
+      { type: 'han', text: '你说"再这样妈妈不喜欢你了"，TA 说"哦那我找爸爸玩"，对负面评价有天然免疫力' },
+    ]
+  },
+  {
+    id: 'd7', icon: '🎯', name: '行为倾向',
+    features: [
+      { type: 'jing', text: '为了买一个心仪已久的玩具，TA 能自己制定"攒星星计划"并且坚持执行好几周不动摇' },
+      { type: 'jing', text: '遇到限制和规则时（如不准吃零食），TA 总能找到各种"技术性漏洞"绕过去' },
+      { type: 'jing', text: '为了达到一个重要目的（如去游乐园），TA 会提前好几天就开始做铺垫工作、步步为营' },
+      { type: 'han', text: '玩乐高或做手工时全情投入，叫 TA 吃饭都听不见，完全沉浸在自己的世界里' },
+      { type: 'han', text: '做奥数题或拼图遇到难的地方，第一反应是"我不行"想要放弃，需要你推一把才愿意再试' },
+      { type: 'han', text: '本来说好要练琴，看到窗外小朋友在玩，立马跑出去加入了，完全忘了练琴这回事' },
+    ]
+  }
+];
+
+// State
+let selections = {}; // { featureKey: true/false }
+
+// Shuffle array
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ===== RENDER DIMENSIONS =====
+function renderDimensions() {
+  const container = document.getElementById('dimensionsContainer');
+  container.innerHTML = '';
+
+  dimensions.forEach((dim, di) => {
+    const shuffled = shuffle(dim.features.map((f, fi) => ({ ...f, origIdx: fi })));
+    const card = document.createElement('div');
+    card.className = 'dimension-card';
+    card.style.animationDelay = (di * 0.05) + 's';
+
+    card.innerHTML = `
+      <div class="dimension-header">
+        <div class="dimension-icon">${dim.icon}</div>
+        <div class="dimension-name">${dim.name}</div>
+        <div class="dimension-badge" id="badge-${dim.id}">未选择</div>
+      </div>
+      <div class="features-list" id="features-${dim.id}"></div>
+    `;
+
+    const featuresList = card.querySelector(`#features-${dim.id}`);
+    shuffled.forEach((f) => {
+      const key = `${dim.id}-${f.origIdx}`;
+      const item = document.createElement('div');
+      item.className = 'feature-item';
+      item.dataset.key = key;
+      item.dataset.type = f.type;
+      item.dataset.dimId = dim.id;
+      item.innerHTML = `
+        <div class="feature-checkbox">
+          <svg viewBox="0 0 12 10" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1,5 4.5,9 11,1"/>
+          </svg>
+        </div>
+        <div class="feature-text">${f.text}</div>
+      `;
+      item.addEventListener('click', () => toggleFeature(item, key, f.type, dim.id));
+      featuresList.appendChild(item);
+    });
+
+    container.appendChild(card);
+  });
+}
+
+// ===== TOGGLE FEATURE =====
+function toggleFeature(item, key, type, dimId) {
+  const wasSelected = selections[key];
+  if (wasSelected) {
+    delete selections[key];
+    item.classList.remove('selected');
+  } else {
+    selections[key] = { type, dimId };
+    item.classList.add('selected');
+    spawnParticles(item.querySelector('.feature-checkbox'));
+  }
+  updateProgress();
+  updateStickyBar();
+}
+
+// ===== PARTICLES =====
+function spawnParticles(el) {
+  const rect = el.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const colors = ['#fbbf24', '#f59e0b', '#fcd34d', '#fb923c', '#fde68a'];
+  for (let i = 0; i < 10; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 4 + Math.random() * 5;
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 30 + Math.random() * 50;
+    const tx = Math.cos(angle) * dist;
+    const ty = Math.sin(angle) * dist;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${cx - size/2}px;top:${cy - size/2}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      --tx:${tx}px;--ty:${ty}px;
+      animation-duration:${0.5 + Math.random() * 0.5}s;
+      animation-delay:${Math.random() * 0.1}s;
+    `;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1000);
+  }
+}
+
+// ===== PROGRESS =====
+function getDimCompletion() {
+  return dimensions.map(dim => {
+    const count = Object.values(selections).filter(v => v.dimId === dim.id).length;
+    return { dim, count };
+  });
+}
+
+function updateProgress() {
+  const completion = getDimCompletion();
+  const done = completion.filter(c => c.count > 0).length;
+  const total = dimensions.length;
+
+  document.getElementById('progressCount').textContent = `${done}/${total} 维度已完成`;
+  document.getElementById('progressBarFill').style.width = `${(done / total) * 100}%`;
+
+  // Dots
+  const dotsEl = document.getElementById('progressDots');
+  dotsEl.innerHTML = '';
+  completion.forEach(({ dim, count }) => {
+    const dot = document.createElement('div');
+    dot.className = 'progress-dot' + (count > 0 ? ' done' : '');
+    dot.innerHTML = `
+      <div class="progress-dot-circle">${count > 0 ? '✓' : ''}</div>
+      <span>${dim.name}</span>
+    `;
+    dotsEl.appendChild(dot);
+  });
+
+  // Badges
+  completion.forEach(({ dim, count }) => {
+    const badge = document.getElementById(`badge-${dim.id}`);
+    if (!badge) return;
+    if (count === 0) {
+      badge.textContent = '未选择';
+      badge.classList.remove('has-selection');
+    } else {
+      badge.textContent = `已选 ${count} 项`;
+      badge.classList.add('has-selection');
+    }
+  });
+}
+
+// ===== STICKY BAR =====
+function updateStickyBar() {
+  const completion = getDimCompletion();
+  const totalSelected = Object.keys(selections).length;
+  const missing = completion.filter(c => c.count === 0).map(c => c.dim.name);
+  const btn = document.getElementById('viewResultBtn');
+  const hint = document.getElementById('stickyHint');
+
+  if (totalSelected === 0) {
+    btn.disabled = true;
+    btn.textContent = '🔍 查看结果（每个维度至少选 1 题）';
+    hint.innerHTML = '';
+  } else if (missing.length > 0) {
+    btn.disabled = true;
+    btn.textContent = '🔍 查看结果（每个维度至少选 1 题）';
+    hint.innerHTML = `还需勾选：<span class="missing">${missing.slice(0, 3).join('、')}${missing.length > 3 ? '…' : ''}</span>`;
+  } else {
+    btn.disabled = false;
+    btn.textContent = `🔍 查看结果（已选 ${totalSelected} 项）`;
+    hint.innerHTML = `<span style="color:var(--emerald-600);font-weight:600;">✅ 7个维度均已完成，可查看结果！</span>`;
+  }
+}
+
+// ===== SCORE CALCULATION =====
+function calculateScore() {
+  const allSelected = Object.values(selections);
+  const total = allSelected.length;
+  if (total === 0) return { score: 0, jingCount: 0, hanCount: 0 };
+  const jingCount = allSelected.filter(v => v.type === 'jing').length;
+  const hanCount = total - jingCount;
+  const score = Math.round((jingCount / total) * 100);
+  return { score, jingCount, hanCount, total };
+}
+
+function getScoreType(score) {
+  if (score <= 30) return { type: 'type-han', label: '🧸 憨娃型（钝感型）', desc: '你的孩子是典型的"憨娃"，对环境刺激反应较迟钝，情绪平稳，适应慢但一旦适应就很稳定。TA 可能不太敏感，但这份"钝感力"是天然的护甲。', adviceType: 'han' };
+  if (score <= 45) return { type: 'type-han-lean', label: '偏向憨娃', desc: '你的孩子偏"憨娃"气质，整体反应较为迟钝，但在某些维度上展现出了精娃的特质。理解和接纳 TA 的节奏，是最大的温柔。', adviceType: 'han' };
+  if (score <= 55) return { type: 'type-balanced', label: '⚖️ 均衡型', desc: '你的孩子精憨特质较为均衡，在不同维度上各有表现。这说明 TA 具有较强的适应性，能在不同情境下灵活调整。', adviceType: 'balanced' };
+  if (score <= 70) return { type: 'type-jing-lean', label: '偏向精娃', desc: '你的孩子偏"精娃"气质，整体反应敏锐，但在某些维度上保留了憨娃的特质。这份平衡是难得的礼物。', adviceType: 'jing' };
+  return { type: 'type-jing', label: '🦊 精娃型（高敏型）', desc: '你的孩子是典型的"精娃"，对环境高度敏感，反应迅速，社交能力强。TA 可能容易情绪波动，但这份敏感也是洞察力和共情力的源泉。', adviceType: 'jing' };
+}
+
+// ===== VIEW RESULT =====
+function viewResult() {
+  const { score, jingCount, hanCount, total } = calculateScore();
+  const scoreInfo = getScoreType(score);
+
+  // Set report date
+  document.getElementById('reportDate').textContent = '评估日期：' + new Date().toLocaleDateString('zh-CN', {year:'numeric',month:'long',day:'numeric'});
+
+  // Score card
+  const scoreCard = document.getElementById('scoreCard');
+  scoreCard.className = `score-card ${scoreInfo.type}`;
+
+  // Animate number
+  animateNumber('scoreNumber', 0, score, 1200);
+
+  // Badge
+  document.getElementById('scoreTypeBadge').textContent = scoreInfo.label;
+
+  // Desc
+  document.getElementById('scoreDesc').textContent = scoreInfo.desc;
+
+  // Spectrum
+  setTimeout(() => {
+    document.getElementById('spectrumIndicator').style.left = score + '%';
+  }, 300);
+
+  // Stats
+  document.getElementById('scoreStats').innerHTML = `基于 <strong>${total}</strong> 项选中特征：<span class="jing-count">精娃特征 ${jingCount} 项</span> · <span class="han-count">憨娃特征 ${hanCount} 项</span>`;
+
+  // Review
+  renderReview();
+
+  // Dim analysis
+  renderDimAnalysis();
+
+  // Advice
+  renderAdvice(scoreInfo.adviceType);
+
+  // Show result
+  const resultSection = document.getElementById('resultSection');
+  resultSection.classList.add('visible');
+
+  // Scroll
+  setTimeout(() => {
+    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+
+  // Trigger dim analysis animations
+  setTimeout(() => {
+    document.querySelectorAll('.dim-analysis-item').forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add('visible');
+        const fill = el.querySelector('.dim-bar-fill');
+        if (fill) fill.style.width = fill.dataset.pct + '%';
+      }, i * 120);
+    });
+  }, 600);
+}
+
+// ===== ANIMATE NUMBER =====
+function animateNumber(id, from, to, duration) {
+  const el = document.getElementById(id);
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(from + (to - from) * ease);
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// ===== RENDER REVIEW =====
+function renderReview() {
+  const container = document.getElementById('reviewContainer');
+  container.innerHTML = '';
+
+  dimensions.forEach(dim => {
+    const dimSelections = Object.entries(selections)
+      .filter(([k, v]) => v.dimId === dim.id);
+    if (dimSelections.length === 0) return;
+
+    const block = document.createElement('div');
+    block.className = 'review-dimension';
+    block.innerHTML = `<div class="review-dim-name">${dim.icon} ${dim.name}</div>`;
+
+    dimSelections.forEach(([key, val]) => {
+      const origIdx = parseInt(key.split('-')[2]);
+      const feature = dim.features[origIdx];
+      const item = document.createElement('div');
+      item.className = `review-feature ${val.type}`;
+      item.innerHTML = `<span class="review-feature-tag">${val.type === 'jing' ? '精娃' : '憨娃'}</span><span>${feature.text}</span>`;
+      block.appendChild(item);
+    });
+
+    container.appendChild(block);
+  });
+}
+
+// ===== RENDER DIM ANALYSIS =====
+function renderDimAnalysis() {
+  const container = document.getElementById('dimAnalysisContainer');
+  container.innerHTML = '';
+
+  dimensions.forEach(dim => {
+    const dimSel = Object.values(selections).filter(v => v.dimId === dim.id);
+    if (dimSel.length === 0) return;
+    const jingCount = dimSel.filter(v => v.type === 'jing').length;
+    const pct = Math.round((jingCount / dimSel.length) * 100);
+
+    const item = document.createElement('div');
+    item.className = 'dim-analysis-item';
+    item.innerHTML = `
+      <div class="dim-analysis-header">
+        <span class="dim-analysis-name">${dim.icon} ${dim.name}</span>
+        <span class="dim-analysis-pct">${pct}% 精娃</span>
+      </div>
+      <div class="dim-bar-bg">
+        <div class="dim-bar-fill" data-pct="${pct}" style="width:0%"></div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// ===== RENDER ADVICE =====
+function renderAdvice(adviceType) {
+  const container = document.getElementById('adviceContainer');
+  container.innerHTML = '';
+
+  const adviceData = {
+    jing: [
+      {
+        title: '💛 理解高敏感',
+        icon: '💛',
+        cls: 'jing-advice',
+        items: [
+          '精娃的高敏感不是"矫情"，而是神经系统对信息的高度处理能力',
+          '避免在公众场合批评或纠正，给 TA 留足面子和缓冲空间',
+          '建立稳定的日常规律，减少不必要的环境变化带来的焦虑',
+          '当 TA 情绪崩溃时，先共情再解决问题，不要急于讲道理',
+        ]
+      },
+      {
+        title: '🎯 发挥精娃优势',
+        icon: '🎯',
+        cls: 'jing-advice',
+        items: [
+          '精娃的观察力和洞察力是宝贵财富，多给予发现和表达的机会',
+          '利用 TA 的策略思维，让 TA 参与家庭决策，培养责任感',
+          '社交能力强的精娃适合领导力培养，可以参加团队活动',
+          '情绪敏感可以转化为高共情力，引导 TA 关心他人、帮助他人',
+        ]
+      }
+    ],
+    han: [
+      {
+        title: '💙 耐心等待，尊重节奏',
+        icon: '💙',
+        cls: 'han-advice',
+        items: [
+          '憨娃的慢热和迟钝不是缺陷，是一种稳定、踏实的气质特征',
+          '给予充足的适应时间，不要催促或强迫 TA 快速融入新环境',
+          '在安全感充足的情况下，憨娃会展现出令人惊喜的专注力',
+          '避免拿 TA 与"活泼"的孩子比较，每种气质都有独特价值',
+        ]
+      },
+      {
+        title: '🌱 主动引导，发现闪光点',
+        icon: '🌱',
+        cls: 'han-advice',
+        items: [
+          '憨娃往往有超强的专注力，找到 TA 感兴趣的领域深耕',
+          '社交方面需要更多练习机会，创造小范围、低压力的社交场景',
+          '情绪钝感是天然的抗压能力，帮助 TA 识别和表达情绪即可',
+          '憨娃的直率和真诚是珍贵品质，不要试图把 TA 改造成"精娃"',
+        ]
+      }
+    ],
+    balanced: [
+      {
+        title: '⚖️ 因势利导，保持平衡',
+        icon: '⚖️',
+        cls: 'general-advice',
+        items: [
+          '均衡型孩子具有很强的适应性，能在不同情境下调整自己',
+          '观察 TA 在哪些维度偏精娃、哪些维度偏憨娃，针对性培养',
+          '均衡不代表没有个性，深入了解 TA 的独特偏好和优势',
+          '这种气质类型在社交和学习中往往表现出色，给予充分肯定',
+        ]
+      }
+    ]
+  };
+
+  const generalAdvice = {
+    title: '🌟 通用养育原则',
+    icon: '🌟',
+    cls: 'general-advice',
+    items: [
+      '气质无好坏，精娃和憨娃都有各自的优势和挑战',
+      '因材施教：了解孩子的气质，调整你的养育方式而非改变孩子',
+      '接纳独特性：每个孩子都是独一无二的，比较只会带来伤害',
+      '气质是底色，性格是画作——好的养育环境能让任何气质绽放',
+    ]
+  };
+
+  const advices = adviceData[adviceType] || [];
+  [...advices, generalAdvice].forEach(adv => {
+    const card = document.createElement('div');
+    card.className = `advice-card ${adv.cls}`;
+    card.innerHTML = `
+      <div class="advice-card-title">
+        <div class="advice-icon">${adv.icon}</div>
+        ${adv.title}
+      </div>
+      <ul class="advice-list">
+        ${adv.items.map(i => `<li>${i}</li>`).join('')}
+      </ul>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// ===== RESET =====
+function resetAll() {
+  selections = {};
+  document.getElementById('resultSection').classList.remove('visible');
+  document.querySelectorAll('.feature-item.selected').forEach(el => el.classList.remove('selected'));
+  updateProgress();
+  updateStickyBar();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== DOWNLOAD =====
+function downloadReport() {
+  window.print();
+}
+
+// ===== INIT =====
+function init() {
+  renderDimensions();
+  updateProgress();
+  updateStickyBar();
+}
+
+init();
+</script>
 </body>
 </html>
