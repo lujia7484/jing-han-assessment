@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script>
+window.contextInfo = {"files":[],"materials":[],"crafts":[]};
+// 处理锚点链接跳转（srcDoc iframe 中锚点链接默认行为不正确）
+document.addEventListener('click', function(e) {
+  var anchor = e.target.closest('a');
+  if (anchor) {
+    var href = anchor.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      var targetId = href.slice(1);
+      var target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+});
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>先天气质评估报告 · 精娃 vs 憨娃 | 青稞家庭教育</title>
+<style>
+  /* ===== CSS VARIABLES ===== */
+  :root {
+    --amber-50: #fffbeb;
+    --amber-100: #fef3c7;
+    --amber-200: #fde68a;
+    --amber-300: #fcd34d;
+    --amber-400: #fbbf24;
+    --amber-500: #f59e0b;
+    --amber-600: #d97706;
+    --amber-700: #b45309;
+    --indigo-50: #eef2ff;
+    --indigo-100: #e0e7ff;
+    --indigo-400: #818cf8;
+    --indigo-500: #6366f1;
+    --indigo-600: #4f46e5;
+    --warm-bg: #fffdf9;
+    --card-bg: #faf8f5;
+    --text-dark: #292524;
+    --text-body: #57534e;
+    --text-muted: #a8a29e;
+    --border: #e7e5e4;
+    --divider: #f5f5f4;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+  }
+
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    background: var(--warm-bg);
+    color: var(--text-body);
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ===== PRINT TOOLBAR ===== */
+  .print-toolbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(255, 253, 249, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .toolbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .toolbar-logo {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--amber-500), var(--amber-600));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .toolbar-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+
+  .toolbar-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .btn-print {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--amber-500), var(--amber-600));
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
+  }
+
+  .btn-print:hover {
+    background: linear-gradient(135deg, var(--amber-600), var(--amber-700));
+    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .btn-print:active {
+    transform: translateY(0);
+  }
+
+  /* ===== MAIN LAYOUT ===== */
+  .page-wrapper {
+    padding-top: 72px;
+    padding-bottom: 48px;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  /* ===== REPORT HEADER ===== */
+  .report-header {
+    text-align: center;
+    padding-bottom: 28px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .header-deco-line {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--amber-300), var(--amber-500), var(--amber-300), transparent);
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+
+  .header-org {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .header-org::before,
+  .header-org::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .header-main-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--amber-700);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  .header-sub-title {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  .header-sub-title span.indigo {
+    color: var(--indigo-500);
+    font-weight: 700;
+  }
+
+  .header-sub-title span.amber {
+    color: var(--amber-600);
+    font-weight: 700;
+  }
+
+  .header-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+
+  .header-bottom-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--amber-200), transparent);
+    margin-top: 28px;
+  }
+
+  /* ===== SECTION CARDS ===== */
+  .section-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--amber-200);
+    border-radius: var(--radius-xl);
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
+    overflow: hidden;
+  }
+
+  .section-card-inner {
+    padding: 28px 28px;
+  }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    padding-left: 2px;
+  }
+
+  /* ===== SCORE CARD ===== */
+  .score-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--indigo-400);
+    border-radius: var(--radius-xl);
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
+    overflow: hidden;
+  }
+
+  .score-card-inner {
+    padding: 36px 28px 28px;
+    text-align: center;
+  }
+
+  .score-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  /* SVG Ring */
+  .score-ring-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 20px;
+  }
+
+  .score-ring-svg {
+    width: 160px;
+    height: 160px;
+    transform: rotate(-90deg);
+  }
+
+  .score-ring-bg {
+    fill: none;
+    stroke: var(--indigo-100);
+    stroke-width: 12;
+  }
+
+  .score-ring-fill {
+    fill: none;
+    stroke: url(#scoreGradient);
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 408.41;
+    stroke-dashoffset: 306.31; /* 408.41 * (1 - 0.25) */
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .score-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .score-number {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--indigo-500);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .score-max {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .score-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    background: var(--indigo-50);
+    color: var(--indigo-600);
+    border: 1.5px solid var(--indigo-100);
+    border-radius: 24px;
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+
+  .score-desc {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto 24px;
+  }
+
+  /* Spectrum Bar */
+  .spectrum-wrapper {
+    background: var(--card-bg);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+
+  .spectrum-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .spectrum-labels .left {
+    color: var(--indigo-500);
+    font-weight: 600;
+  }
+
+  .spectrum-labels .right {
+    color: var(--amber-600);
+    font-weight: 600;
+  }
+
+  .spectrum-track {
+    height: 10px;
+    background: linear-gradient(90deg, var(--indigo-100), var(--amber-100));
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .spectrum-marker {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    background: white;
+    border: 3px solid var(--indigo-500);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
+  }
+
+  .spectrum-marker-label {
+    position: absolute;
+    top: -22px;
+    left: 25%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: var(--indigo-600);
+    font-weight: 700;
+    white-space: nowrap;
+    background: var(--indigo-50);
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--indigo-100);
+  }
+
+  .spectrum-track-outer {
+    position: relative;
+    padding-top: 28px;
+  }
+
+  .score-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .score-meta span {
+    font-weight: 600;
+  }
+
+  .score-meta .amber { color: var(--amber-600); }
+  .score-meta .indigo { color: var(--indigo-500); }
+
+  /* ===== CHOICES SECTION ===== */
+  .dimension-group {
+    margin-bottom: 18px;
+  }
+
+  .dimension-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .dimension-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .choice-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 6px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  .choice-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .choice-item.jingwa {
+    background: rgba(245, 158, 11, 0.07);
+    border-left: 3px solid var(--amber-400);
+  }
+
+  .choice-item.hanwa {
+    background: rgba(99, 102, 241, 0.07);
+    border-left: 3px solid var(--indigo-400);
+  }
+
+  .choice-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  .choice-tag.jingwa {
+    background: var(--amber-100);
+    color: var(--amber-700);
+    border: 1px solid var(--amber-200);
+  }
+
+  .choice-tag.hanwa {
+    background: var(--indigo-100);
+    color: var(--indigo-600);
+    border: 1px solid var(--indigo-100);
+  }
+
+  .choice-text {
+    flex: 1;
+  }
+
+  /* ===== DIMENSION BARS ===== */
+  .dim-row {
+    margin-bottom: 16px;
+  }
+
+  .dim-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .dim-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .dim-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .dim-pct {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .dim-pct.high-amber {
+    color: var(--amber-600);
+  }
+
+  .dim-pct.mid {
+    color: var(--indigo-500);
+  }
+
+  .dim-track {
+    height: 10px;
+    background: var(--indigo-50);
+    border-radius: 5px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .dim-fill {
+    height: 100%;
+    border-radius: 5px;
+    position: relative;
+    min-width: 0;
+    transition: width 0.8s ease;
+  }
+
+  .dim-dot {
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    border: 2.5px solid currentColor;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+
+  .dim-fill-0 {
+    width: 0%;
+  }
+
+  .dim-fill-50 {
+    width: 50%;
+    background: linear-gradient(90deg, var(--indigo-400), var(--amber-400));
+  }
+
+  .dim-fill-100 {
+    width: 100%;
+    background: linear-gradient(90deg, var(--indigo-400), var(--amber-500));
+  }
+
+  /* For 0% — show just a dot at start */
+  .dim-dot-zero {
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    border: 2.5px solid var(--indigo-400);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+
+  /* ===== ADVICE CARDS ===== */
+  .advice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .advice-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .advice-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 18px;
+  }
+
+  .advice-card.indigo-tint {
+    background: rgba(99, 102, 241, 0.04);
+    border-color: rgba(99, 102, 241, 0.18);
+  }
+
+  .advice-card.amber-tint {
+    background: rgba(245, 158, 11, 0.04);
+    border-color: rgba(245, 158, 11, 0.22);
+  }
+
+  .advice-card.gray-tint {
+    background: var(--card-bg);
+    border-color: var(--border);
+  }
+
+  .advice-card-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .advice-card-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .advice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .advice-list li {
+    font-size: 12px;
+    color: var(--text-body);
+    line-height: 1.65;
+    padding: 5px 0;
+    padding-left: 14px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .advice-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .advice-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+
+  .advice-card.indigo-tint .advice-list li::before {
+    background: var(--indigo-400);
+  }
+
+  .advice-card.amber-tint .advice-list li::before {
+    background: var(--amber-500);
+  }
+
+  .advice-card.gray-tint .advice-list li::before {
+    background: var(--text-muted);
+  }
+
+  /* ===== CONSULT CARD ===== */
+  .consult-card {
+    background: white;
+    border: 2px solid var(--amber-200);
+    border-radius: var(--radius-xl);
+    margin-bottom: 16px;
+    box-shadow: 0 2px 16px rgba(217, 119, 6, 0.1);
+    overflow: hidden;
+  }
+
+  .consult-card-inner {
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .consult-deco-top {
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber-300), var(--amber-500), var(--amber-300));
+    margin-bottom: 0;
+  }
+
+  .consult-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--amber-700);
+    margin-bottom: 6px;
+  }
+
+  .consult-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .consult-qr {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 16px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .consult-qr-icon {
+    font-size: 32px;
+  }
+
+  .consult-qr-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .consult-teacher {
+    font-size: 15px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+  }
+
+  .consult-teacher strong {
+    color: var(--amber-600);
+    font-weight: 800;
+  }
+
+  .consult-note {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 20px;
+  }
+
+  /* ===== FOOTER ===== */
+  .report-footer {
+    text-align: center;
+    padding: 20px 0 8px;
+  }
+
+  .report-footer p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  .footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin-bottom: 16px;
+  }
+
+  /* ===== PRINT STYLES ===== */
+  @media print {
+    @page {
+      margin: 12mm 14mm;
+      size: A4;
+    }
+
+    body {
+      background: #fffdf9 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      font-size: 12px;
+    }
+
+    .print-toolbar {
+      display: none !important;
+    }
+
+    .page-wrapper {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    .container {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+
+    .section-card,
+    .score-card,
+    .consult-card {
+      box-shadow: none !important;
+      break-inside: avoid;
+      margin-bottom: 10px !important;
+    }
+
+    .advice-grid {
+      break-inside: avoid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .advice-card {
+      break-inside: avoid;
+    }
+
+    .dimension-group {
+      break-inside: avoid;
+    }
+
+    .dim-row {
+      break-inside: avoid;
+    }
+
+    .score-ring-wrapper {
+      width: 130px !important;
+      height: 130px !important;
+    }
+
+    .score-ring-svg {
+      width: 130px !important;
+      height: 130px !important;
+    }
+
+    .score-number {
+      font-size: 42px !important;
+    }
+
+    .header-deco-line {
+      background: linear-gradient(90deg, transparent, #fcd34d, #f59e0b, #fcd34d, transparent) !important;
+    }
+
+    .spectrum-track {
+      background: linear-gradient(90deg, #e0e7ff, #fef3c7) !important;
+    }
+
+    /* Force background colors */
+    .choice-item.jingwa {
+      background: rgba(245, 158, 11, 0.07) !important;
+    }
+
+    .choice-item.hanwa {
+      background: rgba(99, 102, 241, 0.07) !important;
+    }
+
+    .advice-card.indigo-tint {
+      background: rgba(99, 102, 241, 0.04) !important;
+    }
+
+    .advice-card.amber-tint {
+      background: rgba(245, 158, 11, 0.04) !important;
+    }
+
+    .consult-card {
+      border: 1.5px solid #fde68a !important;
+    }
+
+    .consult-deco-top {
+      background: linear-gradient(90deg, #fcd34d, #f59e0b, #fcd34d) !important;
+    }
+
+    a {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== PRINT TOOLBAR ===== -->
+<div class="print-toolbar">
+  <div class="toolbar-brand">
+    <div class="toolbar-logo">稞</div>
+    <div>
+      <div class="toolbar-title">先天气质评估报告</div>
+      <div class="toolbar-subtitle">精娃 vs 憨娃 · 青稞家庭教育</div>
+    </div>
+  </div>
+  <button class="btn-print" onclick="window.print()">
+    <span>🖨️</span>
+    <span>打印 / 保存 PDF</span>
+  </button>
+</div>
+
+<!-- ===== PAGE WRAPPER ===== -->
+<div class="page-wrapper">
+<div class="container">
+
+  <!-- ===== 1. REPORT HEADER ===== -->
+  <div class="report-header">
+    <div class="header-deco-line"></div>
+    <div class="header-org">青稞时代（广东）心理咨询有限公司 · 青稞家庭教育</div>
+    <h1 class="header-main-title">先天气质评估报告</h1>
+    <p class="header-sub-title">
+      <span class="indigo">🧸 憨娃</span>
+      &nbsp;vs&nbsp;
+      <span class="amber">🦊 精娃</span>
+      &nbsp;·&nbsp;先天气质测评
+    </p>
+    <div class="header-date">
+      <span>📅</span>
+      <span>评估日期：2026年7月10日</span>
+    </div>
+    <div class="header-bottom-line"></div>
+  </div>
+
+  <!-- ===== 2. SCORE CARD ===== -->
+  <div class="score-card">
+    <div class="score-card-inner">
+      <p class="score-label">孩子的先天气质偏向</p>
+
+      <!-- SVG Ring -->
+      <div class="score-ring-wrapper">
+        <svg class="score-ring-svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#6366f1"/>
+            </linearGradient>
+          </defs>
+          <!-- Background ring -->
+          <circle class="score-ring-bg" cx="80" cy="80" r="65"/>
+          <!-- Score ring: circumference = 2π×65 ≈ 408.41 -->
+          <!-- 25% score: dashoffset = 408.41 × (1 - 0.25) = 306.31 -->
+          <circle class="score-ring-fill" cx="80" cy="80" r="65"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-number">25</div>
+          <div class="score-max">/ 100</div>
+        </div>
+      </div>
+
+      <!-- Type Badge -->
+      <div>
+        <span class="score-type-badge">😊 偏憨娃（偏钝感型）</span>
+      </div>
+
+      <!-- Description -->
+      <p class="score-desc">
+        孩子整体偏向钝感型 / 启动缓慢型，心态好、不计较得失，沉浸在自己的世界里自得其乐。
+      </p>
+
+      <!-- Spectrum Bar -->
+      <div class="spectrum-wrapper">
+        <div class="spectrum-labels">
+          <span class="left">🧸 憨娃 / 钝感型</span>
+          <span class="right">🦊 精娃 / 高敏型</span>
+        </div>
+        <div class="spectrum-track-outer">
+          <div class="spectrum-marker-label">25 分</div>
+          <div class="spectrum-track">
+            <div class="spectrum-marker"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meta -->
+      <p class="score-meta">
+        基于 <span>8</span> 项选中特征：<span class="amber">精娃特征 2 项</span> · <span class="indigo">憨娃特征 6 项</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== 3. CHOICES SECTION ===== -->
+  <div class="section-card">
+    <div class="section-card-inner">
+      <div class="section-title">📝 您的选择</div>
+      <p class="section-subtitle">以下是您为孩子选择的特征描述，按维度分组展示</p>
+
+      <!-- 自主意识 -->
+      <div class="dimension-group">
+        <div class="dimension-name">🧭 自主意识</div>
+        <div class="choice-item jingwa">
+          <span class="choice-tag jingwa">精娃</span>
+          <span class="choice-text">你给孩子安排好了周末计划，TA 却拿出自己的一套方案，坚持按自己的来，很难被说服</span>
+        </div>
+        <div class="choice-item hanwa">
+          <span class="choice-tag hanwa">憨娃</span>
+          <span class="choice-text">你让 TA 选一个兴趣班，TA 纠结半天选不出来，最后说"妈妈你帮我选吧"</span>
+        </div>
+      </div>
+
+      <!-- 表达与意图 -->
+      <div class="dimension-group">
+        <div class="dimension-name">💬 表达与意图</div>
+        <div class="choice-item hanwa">
+          <span class="choice-tag hanwa">憨娃</span>
+          <span class="choice-text">偷吃了零食后嘴角还挂着渣就来跟你说"我没吃"，撒谎水平约等于零</span>
+        </div>
+      </div>
+
+      <!-- 环境适应 -->
+      <div class="dimension-group">
+        <div class="dimension-name">🌍 环境适应</div>
+        <div class="choice-item hanwa">
+          <span class="choice-tag hanwa">憨娃</span>
+          <span class="choice-text">到一个陌生环境会紧紧跟在你身边，要过好一阵子才慢慢放开，比较慢热</span>
+        </div>
+      </div>
+
+      <!-- 社交能力 -->
+      <div class="dimension-group">
+        <div class="dimension-name">🤝 社交能力</div>
+        <div class="choice-item hanwa">
+          <span class="choice-tag hanwa">憨娃</span>
+          <span class="choice-text">和小朋友相处时一是一二是二，不会特意讨好谁，有时显得又愣又轴</span>
+        </div>
+      </div>
+
+      <!-- 思维模式 -->
+      <div class="dimension-group">
+        <div class="dimension-name">🧠 思维模式</div>
+        <div class="choice-item jingwa">
+          <span class="choice-tag jingwa">精娃</span>
+          <span class="choice-text">你换了微信头像，TA 第二天就发现了；邻居家门上新贴了对联，TA 比你先注意到</span>
+        </div>
+      </div>
+
+      <!-- 情绪表现 -->
+      <div class="dimension-group">
+        <div class="dimension-name">🎭 情绪表现</div>
+        <div class="choice-item hanwa">
+          <span class="choice-tag hanwa">憨娃</span>
+          <span class="choice-text">在学校被老师狠狠批评了，回家跟没事人一样，过一会儿就笑嘻嘻地玩去了</span>
+        </div>
+      </div>
+
+      <!-- 行为倾向 -->
+      <div class="dimension-group">
+        <div class="dimension-name">🎯 行为倾向</div>
+        <div class="choice-item hanwa">
+          <span class="choice-tag hanwa">憨娃</span>
+          <span class="choice-text">本来说好要练琴，看到窗外小朋友在玩，立马跑出去加入了，完全忘了练琴这回事</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 4. DIMENSION BARS ===== -->
+  <div class="section-card">
+    <div class="section-card-inner">
+      <div class="section-title">📊 各维度精憨分布</div>
+      <p class="section-subtitle">越偏左越"憨"，越偏右越"精"——看清孩子在不同维度的独特面貌</p>
+
+      <!-- 自主意识 50% -->
+      <div class="dim-row">
+        <div class="dim-row-header">
+          <span class="dim-name">🧭 自主意识</span>
+          <span class="dim-pct mid">50% 精娃</span>
+        </div>
+        <div class="dim-track">
+          <div class="dim-fill dim-fill-50">
+            <div class="dim-dot" style="color: #a78bfa;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 表达与意图 0% -->
+      <div class="dim-row">
+        <div class="dim-row-header">
+          <span class="dim-name">💬 表达与意图</span>
+          <span class="dim-pct">0% 精娃</span>
+        </div>
+        <div class="dim-track">
+          <div class="dim-dot-zero"></div>
+        </div>
+      </div>
+
+      <!-- 环境适应 0% -->
+      <div class="dim-row">
+        <div class="dim-row-header">
+          <span class="dim-name">🌍 环境适应</span>
+          <span class="dim-pct">0% 精娃</span>
+        </div>
+        <div class="dim-track">
+          <div class="dim-dot-zero"></div>
+        </div>
+      </div>
+
+      <!-- 社交能力 0% -->
+      <div class="dim-row">
+        <div class="dim-row-header">
+          <span class="dim-name">🤝 社交能力</span>
+          <span class="dim-pct">0% 精娃</span>
+        </div>
+        <div class="dim-track">
+          <div class="dim-dot-zero"></div>
+        </div>
+      </div>
+
+      <!-- 思维模式 100% -->
+      <div class="dim-row">
+        <div class="dim-row-header">
+          <span class="dim-name">🧠 思维模式</span>
+          <span class="dim-pct high-amber">100% 精娃</span>
+        </div>
+        <div class="dim-track">
+          <div class="dim-fill dim-fill-100">
+            <div class="dim-dot" style="color: #f59e0b;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 情绪表现 0% -->
+      <div class="dim-row">
+        <div class="dim-row-header">
+          <span class="dim-name">🎭 情绪表现</span>
+          <span class="dim-pct">0% 精娃</span>
+        </div>
+        <div class="dim-track">
+          <div class="dim-dot-zero"></div>
+        </div>
+      </div>
+
+      <!-- 行为倾向 0% -->
+      <div class="dim-row">
+        <div class="dim-row-header">
+          <span class="dim-name">🎯 行为倾向</span>
+          <span class="dim-pct">0% 精娃</span>
+        </div>
+        <div class="dim-track">
+          <div class="dim-dot-zero"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 5. ADVICE CARDS ===== -->
+  <div class="section-card">
+    <div class="section-card-inner">
+      <div class="section-title">💡 专属养育建议</div>
+      <p class="section-subtitle">根据孩子的气质特点，为您量身定制的养育方向</p>
+
+      <div class="advice-grid">
+
+        <!-- Card 1: 耐心等待 -->
+        <div class="advice-card indigo-tint">
+          <span class="advice-card-icon">💙</span>
+          <div class="advice-card-title">耐心等待<br>尊重节奏</div>
+          <ul class="advice-list">
+            <li>憨娃的慢热和迟钝不是缺陷，是一种稳定、踏实的气质特征</li>
+            <li>给予充足的适应时间，不要催促或强迫 TA 快速融入新环境</li>
+            <li>在安全感充足的情况下，憨娃会展现出令人惊喜的专注力</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: 主动引导 -->
+        <div class="advice-card amber-tint">
+          <span class="advice-card-icon">🌱</span>
+          <div class="advice-card-title">主动引导<br>发现闪光点</div>
+          <ul class="advice-list">
+            <li>避免拿 TA 与"活泼"的孩子比较，每种气质都有独特价值</li>
+            <li>憨娃往往有超强的专注力，找到 TA 感兴趣的领域深耕</li>
+            <li>社交方面需要更多练习机会，创造小范围、低压力的社交场景</li>
+            <li>情绪钝感是天然的抗压能力，帮助 TA 识别和表达情绪即可</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: 通用原则 -->
+        <div class="advice-card gray-tint">
+          <span class="advice-card-icon">🌟</span>
+          <div class="advice-card-title">通用养育<br>原则</div>
+          <ul class="advice-list">
+            <li>憨娃的直率和真诚是珍贵品质，不要试图把 TA 改造成"精娃"</li>
+            <li>气质无好坏，精娃和憨娃都有各自的优势和挑战</li>
+            <li>因材施教：了解孩子的气质，调整你的养育方式而非改变孩子</li>
+            <li>接纳独特性：每个孩子都是独一无二的，比较只会带来伤害</li>
+            <li>气质是底色，性格是画作——好的养育环境能让任何气质绽放</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 6. CONSULT CARD ===== -->
+  <div class="consult-card">
+    <div class="consult-deco-top"></div>
+    <div class="consult-card-inner">
+      <h3 class="consult-title">想进一步了解？</h3>
+      <p class="consult-subtitle">家庭教育现状梳理 | 养育模式溯源 | 孩子心理成长分析</p>
+
+      <div class="consult-qr">
+        <div class="consult-qr-icon">📱</div>
+        <div class="consult-qr-text">扫码添加</div>
+      </div>
+
+      <p class="consult-teacher">咨询老师：<strong>来来老师</strong></p>
+      <span class="consult-note">添加请备注"气质评估"</span>
+    </div>
+  </div>
+
+  <!-- ===== 7. FOOTER ===== -->
+  <div class="report-footer">
+    <div class="footer-divider"></div>
+    <p>青稞时代（广东）心理咨询有限公司 · 青稞家庭教育</p>
+    <p>© 2026 先天气质无好坏，因材施教是核心</p>
+  </div>
+
+</div>
+</div>
+
+<script>
+  // Animate ring on load
+  window.addEventListener('load', function() {
+    const ring = document.querySelector('.score-ring-fill');
+    if (ring) {
+      ring.style.strokeDashoffset = '408.41';
+      setTimeout(function() {
+        ring.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        ring.style.strokeDashoffset = '306.31';
+      }, 300);
+    }
+
+    // Animate dimension bars
+    const fills = document.querySelectorAll('.dim-fill');
+    fills.forEach(function(fill, i) {
+      const originalWidth = fill.style.width || fill.className.includes('50') ? '50%' : fill.className.includes('100') ? '100%' : '0%';
+      fill.style.width = '0%';
+      setTimeout(function() {
+        fill.style.transition = 'width 0.9s cubic-bezier(0.4, 0, 0.2, 1)';
+        if (fill.classList.contains('dim-fill-50')) fill.style.width = '50%';
+        else if (fill.classList.contains('dim-fill-100')) fill.style.width = '100%';
+        else fill.style.width = '0%';
+      }, 400 + i * 120);
+    });
+  });
+</script>
+
+</body>
+</html>
