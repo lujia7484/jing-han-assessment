@@ -1655,7 +1655,7 @@ let _origResultHTML = '';
 function renderReportHTML() {
   var s = calculateScore();
   var info = getScoreType(s.score);
-  var ringColor = info.adviceKey === 'jing' ? '#f59e0b' : '#6366f1';
+  var ringColor = info.adviceType === 'jing' ? '#f59e0b' : '#6366f1';
   var ringOffset = 408.41 * (1 - s.score / 100);
   var dateStr = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -1670,7 +1670,7 @@ function renderReportHTML() {
   html += '<div class="rpt-score-card"><div class="rpt-score-inner"><p class="rpt-score-label">孩子的先天气质偏向</p>';
   html += '<div class="rpt-ring-wrap"><svg class="rpt-ring-svg" viewBox="0 0 160 160"><defs><linearGradient id="rptGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="' + ringColor + '"/></linearGradient></defs><circle class="rpt-ring-bg" cx="80" cy="80" r="65"/><circle class="rpt-ring-fill" cx="80" cy="80" r="65" style="stroke-dashoffset:' + ringOffset + '"/></svg>';
   html += '<div class="rpt-ring-center"><div class="rpt-ring-num" style="color:' + ringColor + '">' + s.score + '</div><div class="rpt-ring-max">/ 100</div></div></div>';
-  html += '<span class="rpt-badge ' + (info.adviceKey === 'jing' ? 'jing' : 'han') + '">' + info.label + '</span>';
+  html += '<span class="rpt-badge ' + (info.adviceType === 'jing' ? 'jing' : 'han') + '">' + info.label + '</span>';
   html += '<p class="rpt-score-desc">' + (info.desc || '') + '</p>';
 
   // Spectrum
@@ -1709,7 +1709,7 @@ function renderReportHTML() {
 
   // Advice
   html += '<div class="rpt-section"><div class="rpt-section-inner"><div class="rpt-section-title">💡 专属养育建议</div><p class="rpt-section-subtitle">根据孩子的气质特点，为您量身定制的养育方向</p><div class="rpt-advice-grid">';
-  var adv = (info.adviceKey === 'jing') ? [
+  var adv = (info.adviceType === 'jing') ? [
     { icon: '💛', title: '理解高敏感', tint: 'amber-tint', items: ['精娃的高敏感不是"矫情"，而是神经系统对信息的高度处理能力','避免在公众场合批评或纠正，给 TA 留足面子和缓冲空间','建立稳定的日常规律，减少不必要的环境变化带来的焦虑','当 TA 情绪崩溃时，先共情再解决问题，不要急于讲道理'] },
     { icon: '🎯', title: '发挥精娃优势', tint: 'amber-tint', items: ['精娃的观察力和洞察力是宝贵财富，多给予发现和表达的机会','利用 TA 的策略思维参与家庭决策，培养责任感','社交能力强的精娃适合领导力培养，多参加团队活动','情绪敏感可以转化为高共情力，引导 TA 关心帮助他人'] },
     { icon: '🌟', title: '通用养育原则', tint: 'gray-tint', items: ['气质无好坏，精娃和憨娃都有各自的优势和挑战','因材施教：了解孩子的气质，调整养育方式而非改变孩子','接纳独特性：每个孩子都是独一无二的，比较只会带来伤害','气质是底色，性格是画作——好的养育环境能让任何气质绽放'] }
