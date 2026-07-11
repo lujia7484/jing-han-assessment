@@ -21,7 +21,7 @@ document.addEventListener('click', function(e) {
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>精娃 vs 憨娃 — 先天气质评估 | 青稞家庭教育</title>
+<title>精娃 vs 憨娃 vs 倔娃 — 先天气质评估 | 青稞家庭教育</title>
 <style>
 :root {
   --amber-50: #fffbeb;
@@ -141,6 +141,12 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+.banner-title .highlight-jue {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .banner-subtitle {
   font-size: 14px;
   color: rgba(255,255,255,0.65);
@@ -166,6 +172,45 @@ body {
   margin: 0 auto;
   padding: 24px 16px 120px;
 }
+
+/* ===== BASIC INFO CARD ===== */
+.info-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 14px 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(245,158,11,0.1);
+}
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.info-row label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-500);
+  white-space: nowrap;
+}
+.info-row input, .info-row select {
+  padding: 6px 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--gray-700);
+  background: var(--gray-50);
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 0;
+}
+.info-row input:focus, .info-row select:focus {
+  border-color: var(--amber-300);
+}
+.info-row input { width: 80px; }
+.info-row select { width: 70px; }
 
 /* ===== PROGRESS TRACKER ===== */
 .progress-tracker {
@@ -560,6 +605,27 @@ body {
   margin: 0 auto 24px;
 }
 
+/* Ternary Ring 三角环形图 */
+.ternary-ring-wrap { position: relative; width: 160px; height: 160px; margin: 0 auto 16px; }
+.ternary-ring-svg { width: 160px; height: 160px; transform: rotate(-90deg); }
+.ternary-ring-svg circle { transition: stroke-dasharray 1s cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1); }
+.ternary-ring-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.ternary-ring-center .score-number { font-size: 36px; font-weight: 900; margin: 0; }
+
+/* Ternary Bars 三角谱系 */
+.ternary-wrap { margin: 20px 0; }
+.ternary-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.ternary-label { font-size: 13px; font-weight: 700; width: 60px; flex-shrink: 0; text-align: right; }
+.ternary-label.jing-label { color: var(--amber-600); }
+.ternary-label.han-label { color: var(--indigo-500); }
+.ternary-label.jue-label { color: #dc2626; }
+.ternary-track { flex: 1; height: 14px; background: #f3f4f6; border-radius: 7px; overflow: hidden; }
+.ternary-fill { height: 100%; border-radius: 7px; transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); width: 0%; }
+.ternary-fill.jing-fill { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+.ternary-fill.han-fill { background: linear-gradient(90deg, #818cf8, #6366f1); }
+.ternary-fill.jue-fill { background: linear-gradient(90deg, #f87171, #ef4444); }
+.ternary-pct { font-size: 14px; font-weight: 800; width: 44px; flex-shrink: 0; color: var(--gray-700); }
+
 /* Spectrum Bar */
 .spectrum-wrap {
   margin: 0 0 12px;
@@ -600,6 +666,7 @@ body {
 }
 .score-stats .jing-count { color: var(--amber-600); font-weight: 600; }
 .score-stats .han-count { color: var(--indigo-500); font-weight: 600; }
+.score-stats .jue-count { color: #dc2626; font-weight: 600; }
 
 /* Selected Features Review */
 .result-card {
@@ -865,6 +932,7 @@ body {
 /* ===== REPORT VIEW (YouMind 设计) ===== */
 .report-view .banner,
 .report-view .sticky-bar,
+.report-view .info-card,
 .report-view .progress-tracker,
 .report-view .section-hint,
 .report-view .dimension-card,
@@ -918,6 +986,7 @@ body {
 .rpt-badge { display: inline-flex; align-items: center; gap: 6px; padding: 8px 20px; border: 1.5px solid var(--indigo-100); border-radius: 24px; font-size: 15px; font-weight: 800; margin-bottom: 14px; }
 .rpt-badge.jing { background: var(--amber-50); color: var(--amber-700); border-color: var(--amber-200); }
 .rpt-badge.han { background: var(--indigo-50); color: var(--indigo-600); border-color: var(--indigo-100); }
+.rpt-badge.jue { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
 .rpt-score-desc { font-size: 14px; color: #57534e; line-height: 1.7; max-width: 480px; margin: 0 auto 24px; }
 .rpt-score-num.jing { color: var(--amber-500); }
 .rpt-score-num.han { color: var(--indigo-500); }
@@ -943,9 +1012,11 @@ body {
 .rpt-choice:last-child { margin-bottom: 0; }
 .rpt-choice.jingwa { background: rgba(245,158,11,0.07); border-left: 3px solid var(--amber-400); }
 .rpt-choice.hanwa { background: rgba(99,102,241,0.07); border-left: 3px solid var(--indigo-400); }
+.rpt-choice.juewa { background: rgba(239,68,68,0.07); border-left: 3px solid #ef4444; }
 .rpt-choice-tag { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 6px; font-size: 11px; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
 .rpt-choice-tag.jingwa { background: var(--amber-100); color: var(--amber-700); border: 1px solid var(--amber-200); }
 .rpt-choice-tag.hanwa { background: var(--indigo-100); color: var(--indigo-600); border: 1px solid var(--indigo-100); }
+.rpt-choice-tag.juewa { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
 
 /* Dim bars */
 .rpt-dim-row { margin-bottom: 16px; }
@@ -1018,7 +1089,7 @@ body {
 /* ===== PRINT ===== */
 @media print {
   @page { margin: 12mm 14mm; size: A4; }
-  .banner, .sticky-bar, .result-actions, .footer, .progress-tracker, .section-hint, .dimension-card { display: none !important; }
+  .no-print, .banner, .info-card, .sticky-bar, .result-actions, .footer, .progress-tracker, .section-hint, .dimension-card { display: none !important; }
   body { background: #fffdf9 !important; padding: 0; font-size: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .container { max-width: 100% !important; padding: 0 !important; }
   .result-section { display: block !important; }
@@ -1043,7 +1114,7 @@ body {
 <div class="banner">
   <div class="banner-brand"><span>青稞家庭教育</span> · 先天气质评估</div>
   <span class="banner-icon">🧒</span>
-  <h1 class="banner-title">你的孩子是<span class="highlight-jing">精娃</span>还是<span class="highlight-han">憨娃</span>？</h1>
+  <h1 class="banner-title">你的孩子是<span class="highlight-jing">精娃</span>、<span class="highlight-han">憨娃</span>还是<span class="highlight-jue">倔娃</span>？</h1>
   <p class="banner-subtitle">
     气质是与生俱来的——每个孩子对环境的<strong>敏感度</strong>和<strong>反应方式</strong>天生不同。<br>
     读懂孩子的"原始出厂设置"，才能<strong>因材施教、扬长补短</strong>。<br>
@@ -1054,6 +1125,18 @@ body {
 
 <!-- MAIN CONTAINER -->
 <div class="container">
+
+  <!-- BASIC INFO -->
+  <div class="info-card" id="infoCard">
+    <div class="info-row">
+      <label>孩子昵称</label>
+      <input type="text" id="childName" placeholder="如：小明" maxlength="10">
+      <label>年龄</label>
+      <input type="text" id="childAge" placeholder="如：6岁" maxlength="6">
+      <label>性别</label>
+      <select id="childGender"><option value="">请选择</option><option>男</option><option>女</option></select>
+    </div>
+  </div>
 
   <!-- PROGRESS TRACKER -->
   <div class="progress-tracker">
@@ -1081,16 +1164,38 @@ body {
     <!-- Score Card -->
     <div class="score-card" id="scoreCard">
       <div class="score-label-top">孩子的先天气质偏向</div>
-      <div class="score-number" id="scoreNumber">0</div>
+      <!-- 三角环形图 -->
+      <div class="ternary-ring-wrap" id="ternaryRing">
+        <svg class="ternary-ring-svg" viewBox="0 0 180 180">
+          <circle cx="90" cy="90" r="72" fill="none" stroke="#f3f4f6" stroke-width="18"/>
+          <circle cx="90" cy="90" r="72" fill="none" stroke="#f59e0b" stroke-width="18" stroke-linecap="butt"
+            stroke-dasharray="0 452" stroke-dashoffset="0" id="ringJing"/>
+          <circle cx="90" cy="90" r="72" fill="none" stroke="#6366f1" stroke-width="18" stroke-linecap="butt"
+            stroke-dasharray="0 452" stroke-dashoffset="0" id="ringHan"/>
+          <circle cx="90" cy="90" r="72" fill="none" stroke="#ef4444" stroke-width="18" stroke-linecap="butt"
+            stroke-dasharray="0 452" stroke-dashoffset="0" id="ringJue"/>
+        </svg>
+        <div class="ternary-ring-center">
+          <div class="score-number" id="scoreNumber">0</div>
+        </div>
+      </div>
       <div><span class="score-type-badge" id="scoreTypeBadge"></span></div>
       <p class="score-desc" id="scoreDesc"></p>
-      <div class="spectrum-wrap">
-        <div class="spectrum-bar-container">
-          <div class="spectrum-indicator" id="spectrumIndicator" style="left:0%"></div>
+      <div class="ternary-wrap">
+        <div class="ternary-bar-row">
+          <span class="ternary-label jing-label">🦊 精娃</span>
+          <div class="ternary-track"><div class="ternary-fill jing-fill" id="jingFill"></div></div>
+          <span class="ternary-pct" id="jingPctLabel">0%</span>
         </div>
-        <div class="spectrum-labels">
-          <span class="left">🧸 憨娃/钝感型</span>
-          <span class="right">🦊 精娃/高敏型</span>
+        <div class="ternary-bar-row">
+          <span class="ternary-label han-label">🧸 憨娃</span>
+          <div class="ternary-track"><div class="ternary-fill han-fill" id="hanFill"></div></div>
+          <span class="ternary-pct" id="hanPctLabel">0%</span>
+        </div>
+        <div class="ternary-bar-row">
+          <span class="ternary-label jue-label">🔥 倔娃</span>
+          <div class="ternary-track"><div class="ternary-fill jue-fill" id="jueFill"></div></div>
+          <span class="ternary-pct" id="juePctLabel">0%</span>
         </div>
       </div>
       <div class="score-stats" id="scoreStats"></div>
@@ -1102,12 +1207,6 @@ body {
       <div id="reviewContainer"></div>
     </div>
 
-    <!-- Dimension Analysis -->
-    <div class="result-card">
-      <div class="result-card-title">📊 各维度精憨分布</div>
-      <p style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">越偏左越"憨"，越偏右越"精"——看清孩子在不同维度的独特面貌</p>
-      <div id="dimAnalysisContainer"></div>
-    </div>
 
     <!-- Advice -->
     <div id="adviceContainer"></div>
@@ -1163,6 +1262,9 @@ const dimensions = [
       { type: 'han', text: '你问 TA 周末想做什么，回答永远是"随便""都行"，不太有自己的想法' },
       { type: 'han', text: '你让 TA 选一个兴趣班，TA 纠结半天选不出来，最后说"妈妈你帮我选吧"' },
       { type: 'han', text: '玩游戏时伙伴说玩什么就玩什么，从不主动提议，被安排了也不介意' },
+      { type: 'jue', text: '你让 TA 穿某件衣服，TA 坚决不穿，没有理由，就是不要，怎么劝都没用' },
+      { type: 'jue', text: 'TA 想要某个玩具，你不给买，TA 能在商场地上哭闹半小时不起来，死活不妥协' },
+      { type: 'jue', text: '你规定了只能看 20 分钟动画片，到时间 TA 不关，你说一句 TA 顶一句，就是要看完' },
     ]
   },
   {
@@ -1174,6 +1276,9 @@ const dimensions = [
       { type: 'han', text: '想要什么就直接说"我要那个！"从不绕弯子，你一眼就能看穿 TA 的小心思' },
       { type: 'han', text: '开心就哈哈大笑，不高兴马上拉下脸，做错事一问你表情就出卖了自己，藏不住事' },
       { type: 'han', text: '偷吃了零食后嘴角还挂着渣就来跟你说"我没吃"，撒谎水平约等于零' },
+      { type: 'jue', text: '想要什么就大声喊"我要！"得不到就放声大哭，整栋楼都能听见，完全不在乎别人眼光' },
+      { type: 'jue', text: '不高兴了直接躺地上打滚，不管是在家里还是商场，周围的人全看着，TA 也毫不在意' },
+      { type: 'jue', text: '开心的时候满屋子疯跑尖叫，根本停不下来，像个小太阳一样感染所有人' },
     ]
   },
   {
@@ -1185,6 +1290,9 @@ const dimensions = [
       { type: 'han', text: '到一个陌生环境会紧紧跟在你身边，要过好一阵子才慢慢放开，比较慢热' },
       { type: 'han', text: '家里来了不太熟的亲戚，TA 会躲进自己房间不愿意出来打招呼' },
       { type: 'han', text: '转学或换班后前几周每天都闷闷不乐，要一两个月才能慢慢缓过来' },
+      { type: 'jue', text: '换了新学校，TA 不是适应不了，而是天天说"我要回原来的学校"，拒绝接受新环境' },
+      { type: 'jue', text: '到一个新地方，TA 不是躲起来，而是用气场直接主导，让周围人来适应 TA' },
+      { type: 'jue', text: '搬家后 TA 每天跟你闹"我要回家"，明明已经在新家住了半年，还是不愿意接受' },
     ]
   },
   {
@@ -1196,6 +1304,9 @@ const dimensions = [
       { type: 'han', text: '你从 TA 小时候就教"见人要打招呼"，教到七八岁才终于能主动做到，之前每次都要你提醒' },
       { type: 'han', text: '和小朋友相处时一是一二是二，不会特意讨好谁，有时显得又愣又轴' },
       { type: 'han', text: '在学校被排挤或欺负了，不知道怎么反击也不知道怎么求助，回家闷着不说' },
+      { type: 'jue', text: '在小朋友群体中是天然的"孩子王"，自带光环，小朋友们都主动围着 TA 转' },
+      { type: 'jue', text: '别的小朋友跟 TA 打招呼，TA 想理就理，不想理直接甩头走人，拽拽的' },
+      { type: 'jue', text: 'TA 跟人相处很大气，不计较、不记仇，就算刚吵完架转头就跟你和好了' },
     ]
   },
   {
@@ -1207,6 +1318,9 @@ const dimensions = [
       { type: 'han', text: '你换了新发型回到家，TA 过了半天才突然抬头说"诶妈妈你剪头发了？"' },
       { type: 'han', text: '你交代 TA 做三件事，TA 做第一件时太投入太开心，后面两件完全忘光了' },
       { type: 'han', text: 'TA 经常找不到自己的东西，袜子只剩一只、作业本不翼而飞、水壶又忘在学校了' },
+      { type: 'jue', text: 'TA 从不琢磨别人在想什么，你要什么得直接告诉 TA，暗示和潜台词对 TA 完全无效' },
+      { type: 'jue', text: '做事情"不撞南墙不回头"，明明你的方法更简单，TA 非要用自己的笨办法死磕到底' },
+      { type: 'jue', text: 'TA 很少纠结和内耗，想做什么就直接去做，不会瞻前顾后、反复琢磨' },
     ]
   },
   {
@@ -1218,6 +1332,9 @@ const dimensions = [
       { type: 'han', text: '在学校被老师狠狠批评了，回家跟没事人一样，过一会儿就笑嘻嘻地玩去了' },
       { type: 'han', text: '被小伙伴捉弄了也不记仇，憨憨一笑就过去了，不会耿耿于怀，转头就忘了' },
       { type: 'han', text: '你说"再这样妈妈不喜欢你了"，TA 说"哦那我找爸爸玩"，对负面评价有天然免疫力' },
+      { type: 'jue', text: '一哭能哭一两个小时，哭到嗓子哑了、睡着了还在抽泣，谁都劝不住' },
+      { type: 'jue', text: 'TA 一旦被情绪哽住了，你说什么都不管用，只能等 TA 自己的情绪慢慢消散' },
+      { type: 'jue', text: '笑的时候笑得最大声，哭的时候哭得最惨烈，情绪起伏像坐过山车' },
     ]
   },
   {
@@ -1229,6 +1346,9 @@ const dimensions = [
       { type: 'han', text: '玩乐高或做手工时全情投入，叫 TA 吃饭都听不见，完全沉浸在自己的世界里' },
       { type: 'han', text: '做奥数题或拼图遇到难的地方，第一反应是"我不行"想要放弃，需要你推一把才愿意再试' },
       { type: 'han', text: '本来说好要练琴，看到窗外小朋友在玩，立马跑出去加入了，完全忘了练琴这回事' },
+      { type: 'jue', text: '别人越说 TA 不行，TA 越要证明给你看，哪怕练一百遍也要把这件事做成' },
+      { type: 'jue', text: '你越是禁止的事情，TA 越想做，跟你对着干的劲头十足' },
+      { type: 'jue', text: 'TA 要的东西如果第一次没要到，TA 会天天来找你要，直到你妥协为止，绝不放弃' },
     ]
   }
 ];
@@ -1402,70 +1522,86 @@ function updateStickyBar() {
 function calculateScore() {
   const allSelected = Object.values(selections);
   const total = allSelected.length;
-  if (total === 0) return { score: 0, jingCount: 0, hanCount: 0 };
+  if (total === 0) return { jingPct: 0, hanPct: 0, juePct: 0, jingCount: 0, hanCount: 0, jueCount: 0, total: 0 };
   const jingCount = allSelected.filter(v => v.type === 'jing').length;
-  const hanCount = total - jingCount;
-  const score = Math.round((jingCount / total) * 100);
-  return { score, jingCount, hanCount, total };
+  const hanCount = allSelected.filter(v => v.type === 'han').length;
+  const jueCount = allSelected.filter(v => v.type === 'jue').length;
+  const jingPct = Math.round((jingCount / total) * 100);
+  const hanPct = Math.round((hanCount / total) * 100);
+  const juePct = Math.round((jueCount / total) * 100);
+  return { jingPct, hanPct, juePct, jingCount, hanCount, jueCount, total };
 }
 
-function getScoreType(score) {
-  if (score >= 80) return { type: 'type-jing', label: '🦊 典型的精娃（高敏型）', desc: '孩子天生对环境高度敏感，观察力强，反应灵敏，灵活度高。自主意识很强，善于隐藏意图，目标驱动，社交学习能力突出。', adviceType: 'jing' };
-  if (score >= 50) return { type: 'type-jing-lean', label: '😎 偏精娃', desc: '孩子整体偏向高敏型，有一定的观察力和社交意识，但也保留了一些憨直和单纯的一面。', adviceType: 'jing' };
-  if (score >= 20) return { type: 'type-han-lean', label: '😊 偏憨娃（偏钝感型）', desc: '孩子整体偏向钝感型/启动缓慢型，心态好、不计较得失，沉浸在自己的世界里自得其乐。', adviceType: 'han' };
-  return { type: 'type-han', label: '🧸 典型的憨娃（钝感型）', desc: '孩子是典型的启动缓慢型气质，钝感强，启动慢但稳定性高。不隐藏意图，表达直接干脆，容易让人产生信任感。', adviceType: 'han' };
+function getScoreType(s) {
+  var dominant, label, desc, adviceType;
+  // 用原始计数比大小，避免百分比四舍五入导致误判
+  if (s.jingCount > s.hanCount && s.jingCount > s.jueCount) {
+    dominant = 'jing'; adviceType = 'jing';
+    label = s.jingPct >= 50 ? '🦊 精娃（高敏型）' : '🦊 偏精娃';
+    desc = '孩子以高敏型气质为主，对环境高度敏感，观察力强，善于揣摩人心，表达迂回，社交学习能力突出。';
+  } else if (s.hanCount >= s.jueCount) {
+    dominant = 'han'; adviceType = 'han';
+    label = s.hanPct >= 50 ? '🧸 憨娃（钝感型）' : '🧸 偏憨娃';
+    desc = '孩子以钝感型气质为主，心态好不计较，兴趣驱动，沉浸自我世界，启动慢但稳定性高。';
+  } else {
+    dominant = 'jue'; adviceType = 'jue';
+    label = s.juePct >= 50 ? '🔥 倔娃（困难型）' : '🔥 偏倔娃';
+    desc = '孩子以倔强型气质为主，意志过强，自带光芒，情绪强烈，不达目的不罢休，自信且有领导力。';
+  }
+  return { dominant, label, desc, adviceType, ...s };
 }
 
 // ===== VIEW RESULT =====
 function viewResult() {
-  const { score, jingCount, hanCount, total } = calculateScore();
-  const scoreInfo = getScoreType(score);
+  const s = calculateScore();
+  const info = getScoreType(s);
+  var cls = info.dominant === 'jing' ? 'type-jing' : info.dominant === 'han' ? 'type-han' : info.dominant === 'jue' ? 'type-jue' : 'type-balanced';
 
   // Score card
   const scoreCard = document.getElementById('scoreCard');
-  scoreCard.className = `score-card ${scoreInfo.type}`;
+  scoreCard.className = `score-card ${cls}`;
+  var showNum = info.dominant === 'jing' ? s.jingPct : info.dominant === 'han' ? s.hanPct : info.dominant === 'jue' ? s.juePct : Math.max(s.jingPct, s.hanPct, s.juePct);
+  document.getElementById('scoreNumber').textContent = info.dominant === 'mixed' ? showNum + '%' : showNum + '%';
+  document.getElementById('scoreTypeBadge').textContent = info.label;
+  document.getElementById('scoreDesc').textContent = info.desc;
+  document.getElementById('scoreStats').innerHTML = `基于 <strong>${s.total}</strong> 项选中特征：<span class="jing-count">精娃 ${s.jingCount} 项</span> · <span class="han-count">憨娃 ${s.hanCount} 项</span> · <span class="jue-count">倔娃 ${s.jueCount} 项</span>`;
 
-  // Animate number
-  animateNumber('scoreNumber', 0, score, 1200);
-
-  // Badge
-  document.getElementById('scoreTypeBadge').textContent = scoreInfo.label;
-
-  // Desc
-  document.getElementById('scoreDesc').textContent = scoreInfo.desc;
-
-  // Spectrum
-  setTimeout(() => {
-    document.getElementById('spectrumIndicator').style.left = score + '%';
+  // Ternary ring
+  var totalCirc = 452; // 2*PI*72
+  var jingLen = Math.round(totalCirc * s.jingPct / 100);
+  var hanLen = Math.round(totalCirc * s.hanPct / 100);
+  var jueLen = totalCirc - jingLen - hanLen;
+  setTimeout(function() {
+    document.getElementById('ringJing').setAttribute('stroke-dasharray', jingLen + ' ' + totalCirc);
+    document.getElementById('ringJing').setAttribute('stroke-dashoffset', '0');
+    document.getElementById('ringHan').setAttribute('stroke-dasharray', hanLen + ' ' + totalCirc);
+    document.getElementById('ringHan').setAttribute('stroke-dashoffset', -jingLen);
+    document.getElementById('ringJue').setAttribute('stroke-dasharray', jueLen + ' ' + totalCirc);
+    document.getElementById('ringJue').setAttribute('stroke-dashoffset', -(jingLen + hanLen));
   }, 300);
 
-  // Stats
-  document.getElementById('scoreStats').innerHTML = `基于 <strong>${total}</strong> 项选中特征：<span class="jing-count">精娃特征 ${jingCount} 项</span> · <span class="han-count">憨娃特征 ${hanCount} 项</span>`;
+  // Ternary bars
+  setTimeout(function() {
+    document.getElementById('jingFill').style.width = s.jingPct + '%';
+    document.getElementById('hanFill').style.width = s.hanPct + '%';
+    document.getElementById('jueFill').style.width = s.juePct + '%';
+    document.getElementById('jingPctLabel').textContent = s.jingPct + '%';
+    document.getElementById('hanPctLabel').textContent = s.hanPct + '%';
+    document.getElementById('juePctLabel').textContent = s.juePct + '%';
+  }, 200);
 
-  // Review
   renderReview();
+  renderAdvice(info.adviceType);
 
-  // Dim analysis
-  renderDimAnalysis();
-
-  // Advice
-  renderAdvice(scoreInfo.adviceType);
-
-  // Show result
   const resultSection = document.getElementById('resultSection');
   resultSection.classList.add('visible');
+  setTimeout(() => { resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
 
-  // Scroll
-  setTimeout(() => {
-    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 100);
-
-  // Trigger dim analysis animations
   setTimeout(() => {
     document.querySelectorAll('.dim-analysis-item').forEach((el, i) => {
       setTimeout(() => {
         el.classList.add('visible');
-        const fill = el.querySelector('.dim-bar-fill');
+        var fill = el.querySelector('.dim-bar-fill');
         if (fill) fill.style.width = fill.dataset.pct + '%';
       }, i * 120);
     });
@@ -1505,7 +1641,8 @@ function renderReview() {
       const feature = dim.features[origIdx];
       const item = document.createElement('div');
       item.className = `review-feature ${val.type}`;
-      item.innerHTML = `<span class="review-feature-tag">${val.type === 'jing' ? '精娃' : '憨娃'}</span><span>${feature.text}</span>`;
+      var tagText = val.type === 'jing' ? '精娃' : val.type === 'han' ? '憨娃' : '倔娃';
+      item.innerHTML = `<span class="review-feature-tag">${tagText}</span><span>${feature.text}</span>`;
       block.appendChild(item);
     });
 
@@ -1547,7 +1684,7 @@ function renderAdvice(adviceType) {
   const adviceData = {
     jing: [
       {
-        title: '💛 理解高敏感',
+        title: '理解高敏感',
         icon: '💛',
         cls: 'jing-advice',
         items: [
@@ -1558,7 +1695,7 @@ function renderAdvice(adviceType) {
         ]
       },
       {
-        title: '🎯 发挥精娃优势',
+        title: '发挥精娃优势',
         icon: '🎯',
         cls: 'jing-advice',
         items: [
@@ -1571,7 +1708,7 @@ function renderAdvice(adviceType) {
     ],
     han: [
       {
-        title: '💙 耐心等待，尊重节奏',
+        title: '耐心等待，尊重节奏',
         icon: '💙',
         cls: 'han-advice',
         items: [
@@ -1582,7 +1719,7 @@ function renderAdvice(adviceType) {
         ]
       },
       {
-        title: '🌱 主动引导，发现闪光点',
+        title: '主动引导，发现闪光点',
         icon: '🌱',
         cls: 'han-advice',
         items: [
@@ -1609,14 +1746,18 @@ function renderAdvice(adviceType) {
   };
 
   const generalAdvice = {
-    title: '🌟 通用养育原则',
-    icon: '🌟',
+    title: '通用养育原则与常见误区',
+    icon: '🧬',
     cls: 'general-advice',
     items: [
-      '气质无好坏，精娃和憨娃都有各自的优势和挑战',
-      '因材施教：了解孩子的气质，调整你的养育方式而非改变孩子',
-      '接纳独特性：每个孩子都是独一无二的，比较只会带来伤害',
-      '气质是底色，性格是画作——好的养育环境能让任何气质绽放',
+      '气质是与生俱来的"出厂设置"，无好坏之分——精娃、憨娃、倔娃各有优势和挑战',
+      '因材施教是核心：了解孩子的气质类型，调整你的养育方式，而非强行改变孩子',
+      '精娃用心不用力：高敏型孩子需要父母的共情和引导，但不需要过度用力管教',
+      '憨娃费力要耐心：钝感型孩子需要反复教、主动推，不教不练就会被耽误',
+      '倔娃顺毛摸：困难型孩子只能顺毛引导，前期搞定执拗期，后期反而很好教',
+      '⚠️ 警惕过度保护、随意贴心理标签、只重学习忽视劳动',
+      '⚠️ 夫妻教育需一致，私下达成共识，避免互相拆台被孩子利用',
+      '父母自身成长是关键——父母的稳定情绪和持续学习，是孩子最好的成长土壤',
     ]
   };
 
@@ -1654,30 +1795,45 @@ let _origResultHTML = '';
 
 function renderReportHTML() {
   var s = calculateScore();
-  var info = getScoreType(s.score);
-  var ringColor = info.adviceType === 'jing' ? '#f59e0b' : '#6366f1';
-  var ringOffset = 408.41 * (1 - s.score / 100);
+  var info = getScoreType(s);
   var dateStr = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 
   var html = '<div class="report-header"><div class="header-deco-line"></div>';
   html += '<div class="header-org">青稞时代（广东）心理咨询有限公司 · 青稞家庭教育</div>';
+  var childName = document.getElementById('childName').value || '未填写';
+  var childAge = document.getElementById('childAge').value || '未填写';
+  var childGender = document.getElementById('childGender').value || '未填写';
   html += '<h1 class="header-main-title">先天气质评估报告</h1>';
-  html += '<p class="header-sub-title"><span class="indigo">🧸 憨娃</span> vs <span class="amber">🦊 精娃</span> · 先天气质测评</p>';
+  html += '<div style="display:flex;justify-content:center;gap:20px;margin-bottom:14px;font-size:13px;color:#57534e;">';
+  html += '<span>👤 ' + childName + '</span><span>📅 ' + childAge + '</span><span>' + (childGender === '男' ? '👦' : childGender === '女' ? '👧' : '') + childGender + '</span></div>';
   html += '<div class="header-date"><span>📅</span><span>评估日期：' + dateStr + '</span></div>';
   html += '<div class="header-bottom-line"></div></div>';
 
-  // Score
+  // Score - three-segment ring
+  var totalCirc = 452;
+  var jingLen = Math.round(totalCirc * s.jingPct / 100);
+  var hanLen = Math.round(totalCirc * s.hanPct / 100);
+  var jueLen = totalCirc - jingLen - hanLen;
   html += '<div class="rpt-score-card"><div class="rpt-score-inner"><p class="rpt-score-label">孩子的先天气质偏向</p>';
-  html += '<div class="rpt-ring-wrap"><svg class="rpt-ring-svg" viewBox="0 0 160 160"><defs><linearGradient id="rptGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="' + ringColor + '"/></linearGradient></defs><circle class="rpt-ring-bg" cx="80" cy="80" r="65"/><circle class="rpt-ring-fill" cx="80" cy="80" r="65" style="stroke-dashoffset:' + ringOffset + '"/></svg>';
-  html += '<div class="rpt-ring-center"><div class="rpt-ring-num" style="color:' + ringColor + '">' + s.score + '</div><div class="rpt-ring-max">/ 100</div></div></div>';
-  html += '<span class="rpt-badge ' + (info.adviceType === 'jing' ? 'jing' : 'han') + '">' + info.label + '</span>';
+  html += '<div class="rpt-ring-wrap"><svg class="rpt-ring-svg" viewBox="0 0 160 160">';
+  html += '<circle cx="80" cy="80" r="65" fill="none" stroke="#f3f4f6" stroke-width="14"/>';
+  html += '<circle cx="80" cy="80" r="65" fill="none" stroke="#f59e0b" stroke-width="14" stroke-linecap="butt" stroke-dasharray="' + jingLen + ' ' + totalCirc + '" stroke-dashoffset="0"/>';
+  html += '<circle cx="80" cy="80" r="65" fill="none" stroke="#6366f1" stroke-width="14" stroke-linecap="butt" stroke-dasharray="' + hanLen + ' ' + totalCirc + '" stroke-dashoffset="' + (-jingLen) + '"/>';
+  html += '<circle cx="80" cy="80" r="65" fill="none" stroke="#ef4444" stroke-width="14" stroke-linecap="butt" stroke-dasharray="' + jueLen + ' ' + totalCirc + '" stroke-dashoffset="' + (-jingLen - hanLen) + '"/>';
+  html += '</svg>';
+  var showPct = info.dominant === 'jing' ? s.jingPct : info.dominant === 'han' ? s.hanPct : s.juePct;
+  html += '<div class="rpt-ring-center"><div class="rpt-ring-num">' + showPct + '%</div></div></div>';
+  var badgeCls = info.dominant === 'jing' ? 'jing' : info.dominant === 'han' ? 'han' : 'jue';
+  html += '<span class="rpt-badge ' + badgeCls + '">' + info.label + '</span>';
   html += '<p class="rpt-score-desc">' + (info.desc || '') + '</p>';
 
-  // Spectrum
-  html += '<div class="rpt-spectrum"><div class="rpt-spec-labels"><span class="left">🧸 憨娃 / 钝感型</span><span class="right">🦊 精娃 / 高敏型</span></div>';
-  html += '<div class="rpt-spec-track-wrap"><div class="rpt-spec-marker-label" style="left:' + s.score + '%">' + s.score + ' 分</div>';
-  html += '<div class="rpt-spec-track"><div class="rpt-spec-marker" style="left:' + s.score + '%"></div></div></div></div>';
-  html += '<p class="rpt-score-meta">基于 <span>' + s.total + '</span> 项选中特征：<span class="amber">精娃特征 ' + s.jingCount + ' 项</span> · <span class="indigo">憨娃特征 ' + s.hanCount + ' 项</span></p>';
+  // Ternary bars
+  html += '<div class="rpt-spectrum"><p style="font-size:12px;color:#a8a29e;margin-bottom:12px;text-align:center;">三角谱系分布</p>';
+  html += '<div class="ternary-bar-row"><span class="ternary-label jing-label">🦊 精娃</span><div class="ternary-track"><div class="ternary-fill jing-fill" style="width:' + s.jingPct + '%"></div></div><span class="ternary-pct">' + s.jingPct + '%</span></div>';
+  html += '<div class="ternary-bar-row"><span class="ternary-label han-label">🧸 憨娃</span><div class="ternary-track"><div class="ternary-fill han-fill" style="width:' + s.hanPct + '%"></div></div><span class="ternary-pct">' + s.hanPct + '%</span></div>';
+  html += '<div class="ternary-bar-row"><span class="ternary-label jue-label">🔥 倔娃</span><div class="ternary-track"><div class="ternary-fill jue-fill" style="width:' + s.juePct + '%"></div></div><span class="ternary-pct">' + s.juePct + '%</span></div>';
+  html += '</div>';
+  html += '<p class="rpt-score-meta">基于 <span>' + s.total + '</span> 项选中特征：<span class="amber">精娃 ' + s.jingCount + ' 项</span> · <span class="indigo">憨娃 ' + s.hanCount + ' 项</span> · <span style="color:#dc2626;font-weight:600;">倔娃 ' + s.jueCount + ' 项</span></p>';
   html += '</div></div>';
 
   // Choices
@@ -1689,35 +1845,36 @@ function renderReportHTML() {
     dimSel.forEach(function(e) {
       var idx = parseInt(e[0].split('-')[1]);
       var f = dim.features[idx];
-      html += '<div class="rpt-choice ' + (f.type === 'jing' ? 'jingwa' : 'hanwa') + '"><span class="rpt-choice-tag ' + (f.type === 'jing' ? 'jingwa' : 'hanwa') + '">' + (f.type === 'jing' ? '精娃' : '憨娃') + '</span><span>' + f.text + '</span></div>';
+      var cls2 = f.type === 'jing' ? 'jingwa' : f.type === 'han' ? 'hanwa' : 'juewa';
+      var tag2 = f.type === 'jing' ? '精娃' : f.type === 'han' ? '憨娃' : '倔娃';
+      html += '<div class="rpt-choice ' + cls2 + '"><span class="rpt-choice-tag ' + cls2 + '">' + tag2 + '</span><span>' + f.text + '</span></div>';
     });
     html += '</div>';
   });
   html += '</div></div>';
 
-  // Dim analysis
-  html += '<div class="rpt-section"><div class="rpt-section-inner"><div class="rpt-section-title">📊 各维度精憨分布</div><p class="rpt-section-subtitle">越偏左越"憨"，越偏右越"精"</p>';
-  dimensions.forEach(function(dim) {
-    var dimSel = Object.values(selections).filter(function(v) { return v.dimId === dim.id; });
-    if (dimSel.length === 0) return;
-    var jingN = dimSel.filter(function(v) { return v.type === 'jing'; }).length;
-    var pct = Math.round((jingN / dimSel.length) * 100);
-    html += '<div class="rpt-dim-row"><div class="rpt-dim-header"><span class="rpt-dim-label">' + dim.icon + ' ' + dim.name + '</span><span class="rpt-dim-pct' + (pct >= 55 ? ' high-amber' : '') + '">' + pct + '% 偏精</span></div>';
-    html += '<div class="rpt-dim-track"><div class="rpt-dim-fill" style="width:' + pct + '%"></div></div></div>';
-  });
-  html += '</div></div>';
-
   // Advice
   html += '<div class="rpt-section"><div class="rpt-section-inner"><div class="rpt-section-title">💡 专属养育建议</div><p class="rpt-section-subtitle">根据孩子的气质特点，为您量身定制的养育方向</p><div class="rpt-advice-grid">';
-  var adv = (info.adviceType === 'jing') ? [
-    { icon: '💛', title: '理解高敏感', tint: 'amber-tint', items: ['精娃的高敏感不是"矫情"，而是神经系统对信息的高度处理能力','避免在公众场合批评或纠正，给 TA 留足面子和缓冲空间','建立稳定的日常规律，减少不必要的环境变化带来的焦虑','当 TA 情绪崩溃时，先共情再解决问题，不要急于讲道理'] },
-    { icon: '🎯', title: '发挥精娃优势', tint: 'amber-tint', items: ['精娃的观察力和洞察力是宝贵财富，多给予发现和表达的机会','利用 TA 的策略思维参与家庭决策，培养责任感','社交能力强的精娃适合领导力培养，多参加团队活动','情绪敏感可以转化为高共情力，引导 TA 关心帮助他人'] },
-    { icon: '🌟', title: '通用养育原则', tint: 'gray-tint', items: ['气质无好坏，精娃和憨娃都有各自的优势和挑战','因材施教：了解孩子的气质，调整养育方式而非改变孩子','接纳独特性：每个孩子都是独一无二的，比较只会带来伤害','气质是底色，性格是画作——好的养育环境能让任何气质绽放'] }
-  ] : [
-    { icon: '💙', title: '耐心等待<br>尊重节奏', tint: 'indigo-tint', items: ['憨娃的慢热和迟钝不是缺陷，是一种稳定、踏实的气质特征','给予充足的适应时间，不要催促或强迫 TA 快速融入新环境','在安全感充足的情况下，憨娃会展现出令人惊喜的专注力','憨娃的直率和真诚是珍贵品质，不要试图把 TA 改造成"精娃"'] },
-    { icon: '🌱', title: '主动引导<br>发现闪光点', tint: 'amber-tint', items: ['避免拿 TA 与"活泼"的孩子比较，每种气质都有独特价值','憨娃往往有超强的专注力，找到 TA 感兴趣的领域深耕','社交方面需要更多练习机会，创造小范围、低压力的社交场景','情绪钝感是天然的抗压能力，帮助 TA 识别和表达情绪即可'] },
-    { icon: '🌟', title: '通用养育<br>原则', tint: 'gray-tint', items: ['憨娃的直率和真诚是珍贵品质，不要试图把 TA 改造成"精娃"','气质无好坏，精娃和憨娃都有各自的优势和挑战','因材施教：了解孩子的气质，调整你的养育方式而非改变孩子','接纳独特性：每个孩子都是独一无二的，比较只会带来伤害','气质是底色，性格是画作——好的养育环境能让任何气质绽放'] }
-  ];
+  var adv;
+  if (info.dominant === 'jing') {
+    adv = [
+      { icon: '💛', title: '理解高敏感', tint: 'amber-tint', items: ['高敏感不是矫情，是神经系统对信息的高度处理能力','避免在公众场合批评或纠正，给 TA 留足面子','建立稳定的日常规律，减少不必要的环境变化','当 TA 情绪崩溃时，先共情再解决问题'] },
+      { icon: '🎯', title: '发挥精娃优势', tint: 'amber-tint', items: ['观察力和洞察力是宝贵财富，多给予表达机会','利用策略思维参与家庭决策，培养责任感','社交能力强，适合领导力培养','精娃用心不用力——过度管教反而适得其反'] },
+      { icon: '🧬', title: '通用养育提醒', tint: 'gray-tint', items: ['气质无好坏，三类气质各有优势和挑战','因材施教：了解孩子的气质，调整养育方式而非改变孩子','精娃培养得当是人才，过度放纵成隐患','父母自身稳定是最好的成长土壤'] }
+    ];
+  } else if (info.dominant === 'jue') {
+    adv = [
+      { icon: '🔥', title: '顺毛摸的艺术', tint: 'amber-tint', items: ['倔娃只能顺毛引导，不可硬碰硬','3-5岁执拗期必须重视，修正社会化行为','保留自信和光芒，同时防止变成自我中心','让他那股劲用在建设性方向上，破坏力就变生产力'] },
+      { icon: '💪', title: '把倔劲变优势', tint: 'amber-tint', items: ['倔娃好强要赢，把注意力引导到学业上会非常出色','给他适度的挑战和竞争环境，激发内在动力','他越不让你做的事他越要做——利用这个特点正向引导','前期搞定执拗期，后期他是最省心的孩子'] },
+      { icon: '🧬', title: '通用养育提醒', tint: 'gray-tint', items: ['气质无好坏，三类气质各有优势和挑战','倔娃自带光芒，是一体两面——那股劲用好了特别好','因材施教：了解孩子的气质，调整养育方式而非改变孩子','父母自身稳定是最好的成长土壤'] }
+    ];
+  } else {
+    adv = [
+      { icon: '💙', title: '耐心等待，尊重节奏', tint: 'indigo-tint', items: ['慢热不是缺陷，是稳定踏实的气质特征','给予充足的适应时间，不要催促','在安全感充足时，会展现惊人的专注力','憨娃费力要耐心——反复教反复练，不可静待花开'] },
+      { icon: '🌱', title: '主动引导，发现闪光点', tint: 'amber-tint', items: ['不跟别人比，每种气质都有独特价值','兴趣驱动型，找到热爱的领域深耕','社交需反复教导，创造低压力的练习场景','后发优势——一旦开窍会很优秀'] },
+      { icon: '🧬', title: '通用养育提醒', tint: 'gray-tint', items: ['气质无好坏，三类气质各有优势和挑战','憨娃不教不练就会被耽误，不可放任','因材施教：了解孩子的气质，调整养育方式而非改变孩子','父母自身稳定是最好的成长土壤'] }
+    ];
+  }
   adv.forEach(function(a) {
     html += '<div class="rpt-advice-card ' + a.tint + '"><span class="rpt-advice-icon">' + a.icon + '</span><div class="rpt-advice-title">' + a.title + '</div><ul class="rpt-advice-list">';
     a.items.forEach(function(i) { html += '<li>' + i + '</li>'; });
@@ -1731,6 +1888,9 @@ function renderReportHTML() {
   html += '<div class="rpt-consult-qr"><img src="来来老师.png" alt="来来老师微信二维码"></div>';
   html += '<p class="rpt-consult-teacher">咨询老师：<strong>来来老师</strong></p>';
   html += '<span class="rpt-consult-note">添加请备注"气质评估"</span></div></div>';
+
+  // Exit button
+  html += '<div class="no-print" style="text-align:center;padding:16px 0 40px;"><button onclick="exitPreview()" style="display:inline-block;padding:12px 40px;background:#1f2937;color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;">✕ 返回评估结果</button></div>';
 
   // Footer
   html += '<div class="rpt-footer"><div class="rpt-footer-divider"></div><p>青稞时代（广东）心理咨询有限公司 · 青稞家庭教育</p><p>© 2026 先天气质无好坏，因材施教是核心</p></div>';
@@ -1760,8 +1920,18 @@ function exitPreview() {
 }
 
 function downloadReport() {
-  previewReport();
-  setTimeout(function() { window.print(); }, 400);
+  if (!reportMode) _origResultHTML = document.getElementById('resultSection').innerHTML;
+  document.getElementById('resultSection').innerHTML = renderReportHTML();
+  document.body.classList.add('report-view');
+  window.print();
+  // 打印后恢复
+  setTimeout(function() {
+    document.getElementById('resultSection').innerHTML = _origResultHTML;
+    document.body.classList.remove('report-view');
+    document.getElementById('btnDownload').style.display = '';
+    document.getElementById('btnPreview').style.display = '';
+    document.getElementById('btnExitPreview').style.display = 'none';
+  }, 1000);
 }
 
 

@@ -134,6 +134,7 @@ function renderChecklist() {
     header.innerHTML = `
       <span class="dimension-icon">${dim.icon}</span>
       <span class="dimension-name">${dim.name}</span>
+      <span class="dimension-badge" id="badge-${dim.id}">未选择</span>
     `;
     card.appendChild(header);
 
@@ -172,6 +173,46 @@ function toggleTrait(traitId, element) {
     burstParticles(element.querySelector('.trait-checkbox'));
   }
   updateSubmitButton();
+  updateProgress();
+}
+
+// --- 进度追踪 ---
+function getDimCompletion() {
+  return dimensions.map(dim => ({
+    dim,
+    count: Object.values(checkedState).filter((v, k) => {
+      // find which dimension this trait belongs to
+      return dim.traits.some(t => t.id === k);
+    }).length
+  }));
+}
+
+function updateProgress() {
+  const completion = dimensions.map(dim => ({
+    dim,
+    count: dim.traits.filter(t => checkedState[t.id]).length
+  }));
+  const done = completion.filter(c => c.count > 0).length;
+  const elCount = document.getElementById('progressCount');
+  const elBar = document.getElementById('progressBarFill');
+  const elDots = document.getElementById('progressDots');
+  if (!elCount || !elBar || !elDots) return;
+  elCount.textContent = `${done}/7 维度已完成`;
+  elBar.style.width = `${(done / 7) * 100}%`;
+  elDots.innerHTML = '';
+  completion.forEach(({ dim, count }) => {
+    const dot = document.createElement('div');
+    dot.className = 'progress-dot' + (count > 0 ? ' done' : '');
+    dot.innerHTML = `<div class="progress-dot-circle">${count > 0 ? '✓' : ''}</div><span>${dim.name}</span>`;
+    elDots.appendChild(dot);
+  });
+  // 更新卡片徽章
+  completion.forEach(({ dim, count }) => {
+    const badge = document.getElementById(`badge-${dim.id}`);
+    if (!badge) return;
+    if (count === 0) { badge.textContent = '未选择'; badge.classList.remove('has-selection'); }
+    else { badge.textContent = `已选 ${count} 项`; badge.classList.add('has-selection'); }
+  });
 }
 
 // --- 粒子迸发特效 ---
@@ -242,6 +283,22 @@ function updateSubmitButton() {
     btn.textContent = `🔍 还需勾选：${empty.join('、')}`;
   }
   updateCounterHint();
+  updateStickyHint();
+}
+
+// --- 悬浮底栏提示 ---
+function updateStickyHint() {
+  const hint = document.getElementById('stickyHint');
+  if (!hint) return;
+  const count = Object.keys(checkedState).length;
+  const empty = getEmptyDimensions();
+  if (count === 0) {
+    hint.innerHTML = '';
+  } else if (empty.length > 0) {
+    hint.innerHTML = `还需勾选：<span class="missing">${empty.slice(0, 4).join('、')}${empty.length > 4 ? '…' : ''}</span>`;
+  } else {
+    hint.innerHTML = '<span style="color:#10b981;font-weight:600;">✅ 7个维度均已覆盖，可查看结果！</span>';
+  }
 }
 
 // --- 计数器提示 ---
