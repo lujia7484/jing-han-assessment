@@ -1989,45 +1989,52 @@ function saveRecord() {
 
   var apiUrl = 'https://api.github.com/repos/' + REPO_OWNER + '/' + REPO_NAME + '/contents/' + FILE_PATH;
 
-  // 1. 先获取文件当前内容（需要 SHA 才能更新）
-  fetch(apiUrl, {
-    headers: { 'Authorization': 'token ' + _token() }
-  })
-  .then(function(r) {
-    if (!r.ok) throw new Error('GitHub API 返回 ' + r.status);
-    return r.json();
-  })
-  .then(function(file) {
-    if (!file.content) throw new Error('无法读取文件内容');
-    // 2. 计算序号并拼接新内容
-    var oldContent = _b64Decode(file.content);
-    var lines = oldContent.trim().split('\n');
-    var seq = lines.length; // 表头占第1行，序号从数据行数+1开始
-    var newContent = oldContent.trim() + '\n' + seq + ',' + newRow + '\n';
+  function doSave(retry) {
+    // 1. 获取文件当前内容
+    fetch(apiUrl, { headers: { 'Authorization': 'token ' + _token() } })
+    .then(function(r) {
+      if (!r.ok) throw new Error('GitHub GET 返回 ' + r.status);
+      return r.json();
+    })
+    .then(function(file) {
+      if (!file.content) throw new Error('无法读取文件内容');
+      // 2. 拼接新内容
+      var oldContent = _b64Decode(file.content);
+      var lines = oldContent.trim().split('\n');
+      var seq = lines.length;
+      var newContent = oldContent.trim() + '\n' + seq + ',' + newRow + '\n';
 
-    // 3. 写回 GitHub
-    return fetch(apiUrl, {
-      method: 'PUT',
-      headers: {
-        'Authorization': 'token ' + _token(),
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: '新测试: ' + (document.getElementById('childName').value || '未填写'),
-        content: _b64Encode(newContent),
-        sha: file.sha
-      })
-    });
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(result) {
-    if (result.content) {
+      // 3. 写回
+      return fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + _token(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: '新测试: ' + (document.getElementById('childName').value || '未填写'),
+          content: _b64Encode(newContent),
+          sha: file.sha
+        })
+      }).then(function(r) {
+        if (!r.ok) throw new Error('GitHub PUT 返回 ' + r.status + ' sha=' + file.sha);
+        return r.json();
+      });
+    })
+    .then(function(result) {
       console.log('✅ 记录已保存');
-    }
-  })
-  .catch(function(err) {
-    console.warn('记录保存失败: ' + err.message);
-  });
+    })
+    .catch(function(err) {
+      if (!retry && err.message.indexOf('409') > -1) {
+        // SHA 冲突，重试一次
+        doSave(true);
+      } else {
+        console.warn('保存失败: ' + err.message);
+      }
+    });
+  }
+
+  doSave(false);
 }
 
 // 控制台调用：exportCSV()  从 GitHub 下载 records.csv
