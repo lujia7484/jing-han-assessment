@@ -1593,6 +1593,9 @@ function viewResult() {
   renderReview();
   renderAdvice(info.adviceType);
 
+  // 静默保存到 localStorage（控制台调用 exportCSV() 下载）
+  saveRecord();
+
   const resultSection = document.getElementById('resultSection');
   resultSection.classList.add('visible');
   setTimeout(() => { resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
@@ -1934,6 +1937,90 @@ function downloadReport() {
   }, 1000);
 }
 
+
+// ===== 记录保存（静默POST到服务器） =====
+var STORAGE_KEY = 'jinghan_records';
+
+function saveRecord() {
+  var s = calculateScore();
+  var info = getScoreType(s);
+  var payload = {
+    time: new Date().toLocaleString('zh-CN'),
+    name: document.getElementById('childName').value || '未填写',
+    age: document.getElementById('childAge').value || '未填写',
+    gender: document.getElementById('childGender').value || '未填写',
+    type: info.label,
+    jingPct: s.jingPct,
+    hanPct: s.hanPct,
+    juePct: s.juePct,
+    jingN: s.jingCount,
+    hanN: s.hanCount,
+    jueN: s.jueCount,
+    total: s.total
+  };
+
+  // 发送到服务器（同一域名下），失败时静默降级到 localStorage
+  fetch('/api/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function() {
+    // 服务器不可用时，本地兜底
+    var records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    records.push(payload);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  });
+}
+
+// 控制台调用：exportCSV()  从服务器下载全部 CSV 记录
+function exportCSV() {
+  fetch('/api/records')
+    .then(function(r) {
+      if (!r.ok) throw new Error('服务器返回 ' + r.status);
+      return r.blob();
+    })
+    .then(function(blob) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = '气质评估记录_' + new Date().toISOString().slice(0,10) + '.csv';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      console.log('✅ 已开始下载');
+    })
+    .catch(function() {
+      // 兜底：从 localStorage 导出
+      var records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      if (!records.length) { console.log('服务器和本地均无记录'); return; }
+      var csv = '﻿序号,测试时间,孩子昵称,年龄,性别,气质类型,精娃%,憨娃%,倔娃%,精娃项数,憨娃项数,倔娃项数,总勾选数\n';
+      records.forEach(function(r, i) {
+        csv += (i+1) + ',' + r.time + ',' + r.name + ',' + r.age + ',' + r.gender + ',' + r.type + ',' + r.jingPct + '%,' + r.hanPct + '%,' + r.juePct + '%,' + r.jingN + ',' + r.hanN + ',' + r.jueN + ',' + r.total + '\n';
+      });
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = '气质评估记录_本地_' + new Date().toISOString().slice(0,10) + '.csv';
+      a.click();
+      console.log('⚠️ 服务器不可用，已导出本地 ' + records.length + ' 条');
+    });
+}
+
+// 控制台调用：clearRecords()  清空本地兜底记录
+function clearRecords() {
+  localStorage.removeItem(STORAGE_KEY);
+  console.log('本地兜底记录已清空（服务器上的记录需手动删除 records.csv）');
+}
+
+// 控制台调用：showRecords()  从服务器下载并在控制台查看
+function showRecords() {
+  fetch('/api/records')
+    .then(function(r) { return r.text(); })
+    .then(function(csv) { console.log(csv); })
+    .catch(function() {
+      var records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      console.table(records);
+      console.log('⚠️ 仅本地兜底 ' + records.length + ' 条');
+    });
+}
 
 // ===== INIT =====
 function init() {
